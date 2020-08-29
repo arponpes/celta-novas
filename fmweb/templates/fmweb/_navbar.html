@@ -1,0 +1,27 @@
+{% url 'player_form' as player_form %}
+{% url 'landing_page' as landing_page %}
+<nav class="navbar is-light is-fixed-top">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{% url 'landing_page' %}">
+        <p class="logo-font">Jugadores</p>
+      </a>
+      <div class="navbar-burger burger" data-target="navbar_content">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="navbar-menu" id="navbar_content">
+      <div class="navbar-start">
+        <a class="navbar-item {% if request.get_full_path == home_url %}is-active{% endif %}" id="home" href="{% url 'player_form' %}">Añadir jugador</a>
+      </div>
+      <div class="navbar-end">
+          
+        <a class="navbar-item fa-2x" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
+        <a class="navbar-item fa-2x" href="https://www.instagram.com/?hl=es"><i class="fab fa-instagram "></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
