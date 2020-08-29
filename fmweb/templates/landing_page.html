@@ -1,8 +1,21 @@
 {% extends 'web/base.html' %}
-{% load static from staticfiles %}
+{% load static %}
 {% block content %}
 {% include 'web/_navbar.html' %}
-<div>
-    <p>Foo</p>
+{% for player in players %}
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">{{ player.name }}</p>
+        <p class="subtitle is-6">{{ player.get_position_display }}</p>
+        <p class="subtitle is-6">{{ player.get_opinion_display }}</p>
+      </div>
+    </div>
+    <div class="content">
+      <p>{{ player.notes }}</p>
+    </div>
+  </div>
 </div>
+{% endfor %}
 {% endblock content %}
