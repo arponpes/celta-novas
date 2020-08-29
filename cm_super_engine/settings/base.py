@@ -16,6 +16,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+PROJECT_DIR = os.path.dirname(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'web',
-    'api'
+    'api',
+    'fmweb'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +61,10 @@ ROOT_URLCONF = 'cm_super_engine.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '/web/templates/')],
+        'DIRS': [
+            os.path.join(PROJECT_DIR, '/web/templates/'),
+            os.path.join(PROJECT_DIR, '/fmweb/templates/')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
