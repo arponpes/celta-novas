@@ -133,5 +133,6 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/fm'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'accounts/login'
