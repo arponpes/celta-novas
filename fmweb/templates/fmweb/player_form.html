@@ -3,6 +3,8 @@
 {% block content %}
 {% include 'fmweb/_navbar.html' %}
 <div class="margin-top">
+<div class="columns is-mobile">
+  <div class="column is-three-fifths is-offset-one-fifth">
 <form method="post">
     {% csrf_token %}
 
@@ -40,5 +42,7 @@
         <input class="button is-link" type="submit" value="Guardar">
     </div>
 </form>
+</div>
+</div>
 </div>
 {% endblock content %}

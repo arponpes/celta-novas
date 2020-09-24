@@ -1,7 +1,10 @@
 {% extends 'fmweb/base.html' %}
 {% load static %}
 {% block content %}
+{% include 'fmweb/_navbar.html' %}
 <div class="margin-top">
+<div class="columns is-mobile">
+  <div class="column is-three-fifths is-offset-one-fifth">
 <h2 class="title is-2">Login</h2>
 <form method="post">
 {% csrf_token %}
@@ -25,6 +28,8 @@
       Login
     </button>
   </p>
+</div>
+</div>
 </div>
 </div>
 {% endblock content %}

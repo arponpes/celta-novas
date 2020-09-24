@@ -1,8 +1,10 @@
 {% extends 'fmweb/base.html' %}
 {% block title %}Create an Account{% endblock %}
-
 {% block content %}
+{% include 'fmweb/_navbar.html' %}
 <div class="margin-top">
+<div class="columns is-mobile">
+  <div class="column is-three-fifths is-offset-one-fifth">
 <form method="POST">
 {% csrf_token %}
 
@@ -36,5 +38,7 @@
 </div>
 
 </form>
+</div>
+</div>
 </div>
 {% endblock %}
