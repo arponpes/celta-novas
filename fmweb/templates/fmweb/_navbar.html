@@ -17,31 +17,32 @@
 
     <div class="navbar-menu" id="navbar_content">
       <div class="navbar-start">
-        <a class="navbar-item {% if request.get_full_path == home_url %}is-active{% endif %}" id="home" href="{% url 'player_form' %}">Añadir jugador</a>
+        <a class="navbar-item {% if request.get_full_path == home_url %}is-active{% endif %}" id="home"
+          href="{% url 'player_form' %}">Añadir jugador</a>
       </div>
       <div class="navbar-end">
 
-{% if user.is_authenticated %}
-<div class="container">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-text">
-            <strong>{{ user.username }}</strong>
-          </a>
+        {% if user.is_authenticated %}
+        <div class="container">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-text">
+                <strong>{{ user.username }}</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary" href="{% url 'register' %}">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" href="accounts/login/">
+              Log in
+            </a>
+          </div>
+          {% endif %}
         </div>
       </div>
-</div>
-{% else %}
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" href="{% url 'register' %}">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="accounts/login/">
-            Log in
-          </a>
-        </div>
-        {% endif %}
-      </div>
-  </div>
 </nav>

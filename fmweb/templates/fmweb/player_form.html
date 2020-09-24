@@ -3,46 +3,46 @@
 {% block content %}
 {% include 'fmweb/_navbar.html' %}
 <div class="margin-top">
-<div class="columns is-mobile">
-  <div class="column is-three-fifths is-offset-one-fifth">
-<form method="post">
-    {% csrf_token %}
+    <div class="columns is-mobile">
+        <div class="column is-three-fifths is-offset-one-fifth">
+            <form method="post">
+                {% csrf_token %}
 
-    <div class="field">
-        <label for="id_name" class="label">Name</label>
-        <div class="control">
-            <input class="input" type="text" name="name" maxlength="50" required="" id="id_name">
+                <div class="field">
+                    <label for="id_name" class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" maxlength="50" required="" id="id_name">
+                    </div>
+                </div>
+
+                <div class="select">
+                    <select name="position" id="id_position">
+                        {% for k,v in positions %}
+                        <option value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="select">
+                    <select name="opinion" id="id_opinion">
+                        {% for k,v in opinions %}
+                        <option value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="id_notes" class="label">Message</label>
+                    <div class="control">
+                        <textarea name="notes" id="id_notes" class="textarea" placeholder="Textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <input class="button is-link" type="submit" value="Guardar">
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="select">
-        <select name="position" id="id_position">
-            {% for k,v in positions %}
-            <option value="{{ k }}">{{ v }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div class="select">
-        <select name="opinion" id="id_opinion">
-            {% for k,v in opinions %}
-            <option value="{{ k }}">{{ v }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div class="field">
-        <label for="id_notes" class="label">Message</label>
-        <div class="control">
-            <textarea name="notes" id="id_notes" class="textarea" placeholder="Textarea"></textarea>
-        </div>
-    </div>
-
-    <div class="control">
-        <input class="button is-link" type="submit" value="Guardar">
-    </div>
-</form>
-</div>
-</div>
 </div>
 {% endblock content %}
