@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import RegisterForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Player, POSITIONS, OPINION
 
@@ -16,7 +17,8 @@ class LandingPageView(TemplateView):
         context['players'] = Player.objects.all()
         return context
 
-class PlayerCreate(CreateView):
+class PlayerCreate(LoginRequiredMixin, CreateView):
+    login_url = 'accounts/login/'
     model = Player
     fields = [
         'name',

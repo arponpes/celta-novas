@@ -1,5 +1,7 @@
 {% url 'player_form' as player_form %}
 {% url 'landing_page' as landing_page %}
+{% url 'register' as register %}
+{% url 'accounts/login/' as login %}
 <nav class="navbar is-light is-fixed-top">
   <div class="container">
     <div class="navbar-brand">
@@ -18,10 +20,28 @@
         <a class="navbar-item {% if request.get_full_path == home_url %}is-active{% endif %}" id="home" href="{% url 'player_form' %}">Añadir jugador</a>
       </div>
       <div class="navbar-end">
-          
-        <a class="navbar-item fa-2x" href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
-        <a class="navbar-item fa-2x" href="https://www.instagram.com/?hl=es"><i class="fab fa-instagram "></i></a>
+
+{% if user.is_authenticated %}
+<div class="container">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-text">
+            <strong>{{ user.username }}</strong>
+          </a>
+        </div>
       </div>
-    </div>
+</div>
+{% else %}
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="{% url 'register' %}">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light" href="accounts/login/">
+            Log in
+          </a>
+        </div>
+        {% endif %}
+      </div>
   </div>
 </nav>
