@@ -1,0 +1,21 @@
+html {
+    overflow-y: auto;
+  }
+
+.navbar {
+    height: 3.5rem;
+  }
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+.main {
+    flex-grow: 1;
+  }
+
+.margin-top {
+    margin-top: 4rem;
+  }

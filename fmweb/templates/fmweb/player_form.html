@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 {% include 'fmweb/_navbar.html' %}
+<div class="margin-top">
 <form method="post">
     {% csrf_token %}
 
@@ -39,5 +40,5 @@
         <input class="button is-link" type="submit" value="Guardar">
     </div>
 </form>
-
+</div>
 {% endblock content %}

@@ -2,6 +2,7 @@
 {% block title %}Create an Account{% endblock %}
 
 {% block content %}
+<div class="margin-top">
 <form method="POST">
 {% csrf_token %}
 
@@ -35,4 +36,5 @@
 </div>
 
 </form>
+</div>
 {% endblock %}

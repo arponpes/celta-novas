@@ -1,6 +1,7 @@
 {% extends 'fmweb/base.html' %}
 {% load static %}
 {% block content %}
+<div class="margin-top">
 <h2 class="title is-2">Login</h2>
 <form method="post">
 {% csrf_token %}
@@ -24,5 +25,6 @@
       Login
     </button>
   </p>
+</div>
 </div>
 {% endblock content %}
