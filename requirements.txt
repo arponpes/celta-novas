@@ -3,3 +3,7 @@ pytest
 pytest-django
 factory-boy
 flake8
+Django
+celery
+redis
+psycopg2

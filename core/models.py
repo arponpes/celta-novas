@@ -6,8 +6,8 @@ class New(models.Model):
     SOURCE_CHOICES = (
         ('MR', 'MARCA'),
         ('MC', 'MOI CELESTE'),
-        ('JR', 'LA VOZ DE GALICIA'),
-        ('SR', 'FARO DE VIGO')
+        ('VG', 'LA VOZ DE GALICIA'),
+        ('FV', 'FARO DE VIGO')
     )
 
     title = models.CharField(max_length=30)
