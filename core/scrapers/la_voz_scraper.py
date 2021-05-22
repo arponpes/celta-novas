@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from ..core.models import New
+from core.models import New
 
 
 SOURCE = 'VG'
@@ -14,7 +14,7 @@ def _get_news() -> list:
     return soup.find_all('h2', itemprop='headline')
 
 
-def update_news(news):
+def _update_news(news):
     for new in news:
         url = f'{URL_PREFIX}{new.find("a")["href"]}'
         title = new.find('a').text.strip()
@@ -27,5 +27,6 @@ def update_news(news):
         ).save()
 
 
-if __name__ == '__main__':
-    update_news()
+def execute_lv_scraper():
+    news = _get_news()
+    _update_news(news)

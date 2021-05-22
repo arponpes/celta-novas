@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from ..models import New
+from core.models import New
 
 
 SOURCE = 'FV'
@@ -14,7 +14,7 @@ def _get_news() -> list:
     return soup.find_all('a', class_='new__headline')
 
 
-def update_news(news):
+def _update_news(news):
     for new in news:
         url = f'{URL_PREFIX}{new["href"]}'
         title = new.text.strip()
@@ -25,3 +25,8 @@ def update_news(news):
             url=url,
             source=SOURCE
         ).save()
+
+
+def execute_fv_scraper():
+    news = _get_news()
+    _update_news(news)

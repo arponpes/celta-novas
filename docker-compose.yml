@@ -5,13 +5,13 @@ services:
     build:
       context: .
     ports:
-      - '8000:8000'
+      - '8080:8080'
     volumes:
       - ./app:/app
     command: >
       sh -c 'python3 manage.py migrate &&
              python3 manage.py wait_for_db &&
-             python3 manage.py runserver 0.0.0.0:8000'
+             python3 manage.py runserver 0.0.0.0:8080'
     env_file:
       - ./.env.dev
     depends_on:
@@ -21,7 +21,7 @@ services:
     env_file:
       - ./.env.dev
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes: 
       - pgdata:/var/lib/postgresql/data
   redis:
@@ -30,7 +30,7 @@ services:
     restart: always
     build:
       context: .
-    command: celery -A celta_news docker-compose.yml  worker -l info
+    command: celery -A celta_news worker -l info
     volumes:
       - ./app:/app
     env_file:

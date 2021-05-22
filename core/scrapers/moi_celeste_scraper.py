@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from ..core.models import New
+from core.models import New
 
 
 SOURCE = 'MC'
@@ -13,7 +13,7 @@ def _get_news() -> list:
     return soup.find_all('h3', class_='post-title')
 
 
-def update_news(news):
+def _update_news(news):
     for new in news:
         url = new.find('a')['href']
         if New.objects.filter(url=url).exists():
@@ -25,5 +25,6 @@ def update_news(news):
         ).save()
 
 
-if __name__ == '__main__':
-    update_news()
+def execute_mc_scraper():
+    news = _get_news()
+    _update_news(news)

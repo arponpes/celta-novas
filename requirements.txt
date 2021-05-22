@@ -7,3 +7,5 @@ Django
 celery
 redis
 psycopg2
+requests
+BeautifulSoup4

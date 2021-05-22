@@ -10,7 +10,7 @@ class New(models.Model):
         ('FV', 'FARO DE VIGO')
     )
 
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=200)
     url = models.CharField(max_length=300)
     source = models.CharField(
         max_length=2,
