@@ -30,7 +30,7 @@ services:
     restart: always
     build:
       context: .
-    command: celery -A celta_news worker -l info
+    command: celery -A celta_news beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
     volumes:
       - ./app:/app
     env_file:

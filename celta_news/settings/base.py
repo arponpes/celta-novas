@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'celery',
+    'django_celery_beat',
     'api',
     'web',
     'core'
