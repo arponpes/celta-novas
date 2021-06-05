@@ -1,0 +1,36 @@
+name: Unit tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  celta-news-unittests:
+    runs-on: ubuntu-latest
+    container: python:3.6.11
+    services:
+      postgres:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: app
+        ports:
+        - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      env:
+        GITHUB_WORKFLOW: true
+        database_password: docker
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Setup auxiliary paths
+      run: mkdir -p /var/logs/django
+    - name: Launch tests
+      run: pytest --disable-warnings
+    - name: Launch flake8
+      run: flake8

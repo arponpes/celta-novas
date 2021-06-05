@@ -10,7 +10,7 @@ class NewFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = New
 
-    title = factory.Faker('text')
-    url = factory.Faker('url')
+    title = factory.Sequence(lambda n: 'Title %s' % n)
+    url = factory.Sequence(lambda n: 'Url %s' % n)
     source = factory.fuzzy.FuzzyChoice(choices=source_choices)
     created_at = factory.Faker('date')
