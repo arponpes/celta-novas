@@ -10,3 +10,4 @@ psycopg2
 requests
 BeautifulSoup4
 django-celery-beat
+gunicorn
