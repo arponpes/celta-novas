@@ -2,12 +2,16 @@ from django.db import models
 
 
 class New(models.Model):
+    MARCA = 'MARCA'
+    MOI_CELESTE = 'MOI CELESTE'
+    LA_VOZ_DE_GALICIA = 'LA VOZ DE GALICIA'
+    FARO_DE_VIGO = 'FARO DE VIGO'
 
     SOURCE_CHOICES = (
-        ('MR', 'MARCA'),
-        ('MC', 'MOI CELESTE'),
-        ('VG', 'LA VOZ DE GALICIA'),
-        ('FV', 'FARO DE VIGO')
+        ('MR', MARCA),
+        ('MC', MOI_CELESTE,
+        ('VG', LA_VOZ_DE_GALICIA),
+        ('FV', FARO_DE_VIGO)
     )
 
     title = models.CharField(max_length=200)

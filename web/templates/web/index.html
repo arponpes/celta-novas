@@ -10,12 +10,37 @@
   <section class="section">
     <div class="container">
     {% block content %}
-        {% for new in news %}
-        <h2>
+      <h2>Marca</h2>
+        {% for new in marca_news %}
+        <h3>
           <a href="{{ new.url }}">
             {{ new.title }}
           </a>
-        </h2>
+        </h3>
+        {% endfor %}
+        <h2>La voz de Galicia</h2>
+        {% for new in lv_news %}
+        <h3>
+          <a href="{{ new.url }}">
+            {{ new.title }}
+          </a>
+        </h3>
+        {% endfor %}
+        <h2>Moi celeste</h2>
+        {% for new in mc_news %}
+        <h3>
+          <a href="{{ new.url }}">
+            {{ new.title }}
+          </a>
+        </h3>
+        {% endfor %}
+        <h2>Faro de Vigo</h2>
+        {% for new in fv_news %}
+        <h3>
+          <a href="{{ new.url }}">
+            {{ new.title }}
+          </a>
+        </h3>
         {% endfor %}
     {% endblock %}
     </div>
