@@ -9,7 +9,7 @@ class New(models.Model):
 
     SOURCE_CHOICES = (
         ('MR', MARCA),
-        ('MC', MOI_CELESTE,
+        ('MC', MOI_CELESTE),
         ('VG', LA_VOZ_DE_GALICIA),
         ('FV', FARO_DE_VIGO)
     )
