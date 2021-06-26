@@ -1,26 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
-from core.models import New
+from core.models import Article
 
 
-SOURCE = 'FV'
+SOURCE = Article.FARO_DE_VIGO
 URL_PREFIX = 'https://galego.farodevigo.es/'
 URL = f'{URL_PREFIX}celta-de-vigo/'
 
 
-def _get_news() -> list:
+def _get_articles() -> list:
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     return soup.find_all('a', class_='new__headline')
 
 
-def _update_news(news):
-    for new in news:
-        url = f'{URL_PREFIX}{new["href"]}'
-        title = new.text.strip()
-        if New.objects.filter(url=url).exists():
+def _update_articles(articles):
+    for article in articles:
+        url = f'{URL_PREFIX}{article["href"]}'
+        title = article.text.strip()
+        if Article.objects.filter(url=url).exists():
             continue
-        New(
+        Article(
             title=title,
             url=url,
             source=SOURCE
@@ -28,5 +28,5 @@ def _update_news(news):
 
 
 def execute_fv_scraper():
-    news = _get_news()
-    _update_news(news)
+    articles = _get_articles()
+    _update_articles(articles)

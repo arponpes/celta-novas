@@ -11,34 +11,34 @@
     <div class="container">
     {% block content %}
       <h2>Marca</h2>
-        {% for new in marca_news %}
+        {% for article in marca_articles %}
         <h3>
-          <a href="{{ new.url }}">
-            {{ new.title }}
+          <a href="{{ article.url }}">
+            {{ article.title }}
           </a>
         </h3>
         {% endfor %}
         <h2>La voz de Galicia</h2>
-        {% for new in vg_news %}
+        {% for article in vg_articles %}
         <h3>
-          <a href="{{ new.url }}">
-            {{ new.title }}
+          <a href="{{ article.url }}">
+            {{ article.title }}
           </a>
         </h3>
         {% endfor %}
         <h2>Moi celeste</h2>
-        {% for new in mc_news %}
+        {% for article in mc_articles %}
         <h3>
-          <a href="{{ new.url }}">
-            {{ new.title }}
+          <a href="{{ article.url }}">
+            {{ article.title }}
           </a>
         </h3>
         {% endfor %}
         <h2>Faro de Vigo</h2>
-        {% for new in fv_news %}
+        {% for article in fv_articles %}
         <h3>
-          <a href="{{ new.url }}">
-            {{ new.title }}
+          <a href="{{ article.url }}">
+            {{ article.title }}
           </a>
         </h3>
         {% endfor %}

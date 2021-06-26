@@ -1,30 +1,30 @@
 import requests
 from bs4 import BeautifulSoup
-from core.models import New
+from core.models import Article
 
 
-SOURCE = 'MR'
+SOURCE = Article.MARCA
 URL = 'https://www.marca.com/futbol/celta.html'
 
 
-def _get_news() -> list:
+def _get_articles() -> list:
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     return soup.find_all('h3', class_='mod-title')
 
 
-def _update_news(news):
-    for new in news:
-        url = new.find('a')['href']
-        if New.objects.filter(url=url).exists():
+def _update_articles(articles):
+    for article in articles:
+        url = article.find('a')['href']
+        if Article.objects.filter(url=url).exists():
             continue
-        New(
-            title=new.find('a').text,
+        Article(
+            title=article.find('a').text,
             url=url,
             source=SOURCE
         ).save()
 
 
 def execute_marca_scraper():
-    news = _get_news()
-    _update_news(news)
+    articles = _get_articles()
+    _update_articles(articles)

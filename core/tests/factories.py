@@ -1,14 +1,14 @@
 import factory
 import factory.fuzzy
 
-from core.models import New
+from core.models import Article
 
-source_choices = [s[0] for s in New.SOURCE_CHOICES]
+source_choices = [s[0] for s in Article.SOURCE_CHOICES]
 
 
-class NewFactory(factory.django.DjangoModelFactory):
+class ArticleFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = New
+        model = Article
 
     title = factory.Sequence(lambda n: 'Title %s' % n)
     url = factory.Sequence(lambda n: 'Url %s' % n)
