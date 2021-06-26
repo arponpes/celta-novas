@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 /static/admin
+
+.env.prod

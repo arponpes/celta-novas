@@ -14,9 +14,9 @@ jobs:
       postgres:
         image: postgres:13-alpine
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: app
+          DB_NAME: app
+          DB_USER: postgres
+          DB_PASS: postgres
         ports:
         - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
