@@ -10,15 +10,15 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['marca_articles'] = Article.objects.filter(
-            source='MR'
+            source=Article.MARCA
         ).order_by('-created_at')[:7]
         context['vg_articles'] = Article.objects.filter(
-            source='VG'
+            source=Article.LA_VOZ_DE_GALICIA
         ).order_by('-created_at')[:7]
         context['mc_articles'] = Article.objects.filter(
-            source='MC'
+            source=Article.MOI_CELESTE
         ).order_by('-created_at')[:7]
         context['fv_articles'] = Article.objects.filter(
-            source='FV'
+            source=Article.FARO_DE_VIGO
         ).order_by('-created_at')[:7]
         return context
