@@ -6,3 +6,7 @@ DATABASES = {
         'NAME': 'testing',
     }
 }
+
+LOGS_PATH = ''
+
+LOGGING = ''
