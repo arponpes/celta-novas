@@ -1,11 +1,11 @@
-name: Publish Docker image
+name: Publish Docker images
 
 on: workflow_dispatch
 
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -25,7 +25,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: docker_prod/
+          context: .
+          file: docker_prod/Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
