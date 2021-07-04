@@ -3,7 +3,8 @@ version: '3'
 services:
   app:
     build:
-      context: .
+      context: ../
+      dockerfile: docker_local/Dockerfile
     ports:
       - '8080:8080'
     volumes:
@@ -29,7 +30,8 @@ services:
   celery:
     restart: always
     build:
-      context: .
+      context: ../
+      dockerfile: docker_local/Dockerfile
     command: celery -A celta_news beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
     volumes:
       - ./app:/app

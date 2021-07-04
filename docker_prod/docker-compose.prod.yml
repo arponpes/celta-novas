@@ -3,8 +3,8 @@ version: '3'
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile.prod
+      context: ../
+      dockerfile: docker_prod/Dockerfile.prod
     volumes:
       - ./app:/app
       - static_volume:/celta_news/staticfiles
@@ -29,8 +29,8 @@ services:
   celery:
     restart: always
     build:
-      context: .
-      dockerfile: Dockerfile.prod
+      context: ../
+      dockerfile: docker_prod/Dockerfile.prod
     command: >
       sh -c 'celery -A celta_news beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler &&
              celery -A celta_news worker -l INFO --detach'
