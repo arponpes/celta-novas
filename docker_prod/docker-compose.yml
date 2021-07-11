@@ -39,11 +39,11 @@ services:
       - redis
       - app
   nginx:
-    build: ./nginx
+    build: ../nginx
     volumes:
       - static_volume:/celta_news/staticfiles
     ports:
-      - 1337:80
+      - "80:80"
     depends_on:
       - app
 
