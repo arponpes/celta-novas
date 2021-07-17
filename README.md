@@ -2,7 +2,7 @@
 
 ### Production
 
-docker-compose -f docker-compose.prod.yml up --detach --build
+docker-compose up --detach --build
 
 ### Local
 

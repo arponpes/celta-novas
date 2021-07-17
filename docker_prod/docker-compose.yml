@@ -20,7 +20,7 @@ services:
       - ./.env.prod
     ports:
       - "5433:5433"
-    volumes: 
+    volumes:
       - pgdata:/var/lib/postgresql/data
   redis:
     image: redis:latest
@@ -42,11 +42,14 @@ services:
     build: ../nginx
     volumes:
       - static_volume:/celta_news/staticfiles
+      - configs:/configs
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - app
 
 volumes:
   pgdata:
   static_volume:
+  configs:
