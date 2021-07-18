@@ -3,14 +3,14 @@ FROM python:3.9-buster
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_SETTINGS_MODULE celta_news.settings.local
+ENV DJANGO_SETTINGS_MODULE celta_novas.settings.local
 
 
-RUN mkdir /celta_news
+RUN mkdir /celta_novas
 RUN mkdir -p /var/logs/django/
 
-WORKDIR /celta_news
+WORKDIR /celta_novas
 
-ADD . /celta_news/
+ADD . /celta_novas/
 
 RUN pip install -r requirements.txt

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-setup(name='celta_news',
+setup(name='celta_novas',
       version='1.0',
       packages=find_packages())

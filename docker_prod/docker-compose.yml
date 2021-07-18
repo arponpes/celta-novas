@@ -5,10 +5,10 @@ services:
     image: arponpes/celta_novas:main
     volumes:
       - ./app:/app
-      - static_volume:/celta_news/staticfiles
+      - static_volume:/celta_novas/staticfiles
     command: >
       sh -c 'python3 manage.py wait_for_db &&
-             gunicorn celta_news.wsgi:application --bind 0.0.0.0:8080'
+             gunicorn celta_novas.wsgi:application --bind 0.0.0.0:8080'
     expose:
       - 8080
     env_file: .env.prod
@@ -28,8 +28,8 @@ services:
     restart: always
     image: arponpes/celta_novas:main
     command: >
-      sh -c 'celery -A celta_news beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler &&
-             celery -A celta_news worker -l INFO --detach'
+      sh -c 'celery -A celta_novas beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler &&
+             celery -A celta_novas worker -l INFO --detach'
     volumes:
       - ./app:/app
     env_file:
@@ -41,7 +41,7 @@ services:
   nginx:
     build: ../nginx
     volumes:
-      - static_volume:/celta_news/staticfiles
+      - static_volume:/celta_novas/staticfiles
       - configs:/configs
     ports:
       - "80:80"

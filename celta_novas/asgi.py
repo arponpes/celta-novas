@@ -1,5 +1,5 @@
 """
-ASGI config for celta_news project.
+ASGI config for celta_novas project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celta_news.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celta_novas.settings')
 
 application = get_asgi_application()

@@ -4,7 +4,7 @@ from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proj.settings')
 
-app = Celery('celta_news')
+app = Celery('celta_novas')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 

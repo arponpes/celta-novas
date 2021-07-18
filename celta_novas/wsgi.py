@@ -1,5 +1,5 @@
 """
-WSGI config for celta_news project.
+WSGI config for celta_novas project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celta_news.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'celta_novas.settings')
 
 application = get_wsgi_application()
