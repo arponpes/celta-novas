@@ -132,6 +132,8 @@ STATIC_ROOT = "staticfiles"
 
 CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_TIMEZONE = 'UTC'
+CELERY_ENABLE_UTC = True
 
 LOGS_PATH = '/var/logs/django/'
 

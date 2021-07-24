@@ -1,4 +1,8 @@
+import os
+
 from celery import Celery
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proj.settings')
 
 app = Celery('celta_novas')
 
