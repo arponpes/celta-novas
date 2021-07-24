@@ -9,6 +9,8 @@ services:
       - static_volume:/celta_novas/staticfiles
     command: >
       sh -c 'python3 manage.py wait_for_db &&
+             celery -A celta_novas beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler --detach &&
+             celery -A celta_novas worker -l INFO -n default_worker --detach &&
              gunicorn celta_novas.wsgi:application --bind 0.0.0.0:8080'
     expose:
       - 8080
