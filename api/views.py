@@ -1,9 +1,9 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
 from core.models import Article
 from .serializers import ArticleSerializer
 
 
-class ArticleViewSet(ModelViewSet):
+class ArticleListView(ListAPIView):
     """
     A simple ViewSet for viewing and editing accounts.
     """
