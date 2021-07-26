@@ -1,8 +1,9 @@
 BeautifulSoup4
 celery
-django
+Django
 factory-boy
 django-celery-beat
+django-redis
 djangorestframework
 flake8
 gunicorn

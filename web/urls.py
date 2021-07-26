@@ -1,3 +1,4 @@
+from django.views.decorators.cache import cache_page
 from django.urls import path
 
 from . import views
@@ -5,7 +6,7 @@ from . import views
 urlpatterns = [
     path(
         '',
-        views.HomePageView.as_view(),
+        cache_page(60 * 30)(views.HomePageView.as_view()),
         name='home'
     )
 ]
