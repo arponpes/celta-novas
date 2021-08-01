@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'celery',
     'django_celery_beat',
     'rest_framework',
+    'django_filters',
     'api',
     'web',
     'core'
