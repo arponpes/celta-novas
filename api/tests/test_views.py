@@ -8,7 +8,7 @@ import pytest
 def test_get_articles():
     article_1 = ArticleFactory()
     article_2 = ArticleFactory()
-    expected_response = [
+    expected_results = [
         {
             'title': article_1.title,
             'url': article_1.url,
@@ -25,6 +25,12 @@ def test_get_articles():
             )
         }
     ]
+    expected_response = {
+        'count': 2,
+        'next': None,
+        'previous': None,
+        'results': expected_results
+    }
     client = APIClient()
     response = client.get(reverse('articles'))
     assert response.status_code == 200
