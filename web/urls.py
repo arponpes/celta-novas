@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path(
         '',
-        cache_page(60 * 30)(views.HomePageView.as_view()),
+        cache_page(15 * 30)(views.HomePageView.as_view()),
         name='home'
     )
 ]
