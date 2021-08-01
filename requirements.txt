@@ -13,3 +13,5 @@ pytest
 pytest-django
 redis
 requests
+coverage
+pytest-cov
