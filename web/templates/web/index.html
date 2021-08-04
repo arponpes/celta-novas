@@ -1,54 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Celta Novas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="favicon/site.webmanifest">
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Celta Novas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+  <link href="{% static 'styles.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  {% block content %}
   <section class="section">
     <div class="container">
-    {% block content %}
-      <h2>Marca</h2>
-        {% for article in marca_articles %}
-        <h3>
-          <a href="{{ article.url }}">
-            {{ article.title }}
-          </a>
-        </h3>
-        {% endfor %}
-        <h2>La voz de Galicia</h2>
-        {% for article in vg_articles %}
-        <h3>
-          <a href="{{ article.url }}">
-            {{ article.title }}
-          </a>
-        </h3>
-        {% endfor %}
-        <h2>Moi celeste</h2>
-        {% for article in mc_articles %}
-        <h3>
-          <a href="{{ article.url }}">
-            {{ article.title }}
-          </a>
-        </h3>
-        {% endfor %}
-        <h2>Faro de Vigo</h2>
-        {% for article in fv_articles %}
-        <h3>
-          <a href="{{ article.url }}">
-            {{ article.title }}
-          </a>
-        </h3>
-        {% endfor %}
-    {% endblock %}
-    </div>
+      <div class="columns is-desktop">
+        <div class="column is-three-fifths is-offset-one-fifth">
+          {% for article in page_obj %}
+          <div class="card">
+            <div class="card-content">
+              <a href="{{ article.url }}" target="blank"> {{ article.title }} </a>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                  {{ article.source }}
+                </span>
+              </p>
+              <p class="card-footer-item">
+                <span>
+                  {{ article.created_at }}
+                </span>
+              </p>
+            </footer>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
   </section>
-  </body>
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li>
+        {% if page_obj.has_previous %}
+        <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
+        {% else %}
+        <a class="pagination-previous" disabled>ANTERIOR</a>
+        {% endif %}
+      </li>
+      <li>
+        {% if page_obj.has_next %}
+        <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">SEGUINTE</a>
+        {% else %}
+        <a class="pagination-next" disabled>SEGUINTE</a>
+        {% endif %}
+      </li>
+
+    </ul>
+  </nav>
+  </div>
+  {% endblock %}
+</body>
+
 </html>
