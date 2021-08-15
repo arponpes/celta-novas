@@ -6,9 +6,6 @@ import django_filters
 
 
 class ArticleListView(ListAPIView):
-    """
-    A simple ViewSet for viewing and editing accounts.
-    """
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]

@@ -1,30 +1,26 @@
-import requests
-from bs4 import BeautifulSoup
 from core.models import Article
+from .utils import to_be_created, get_soup
 
 
 SOURCE = Article.MARCA
 URL = 'https://www.marca.com/futbol/celta.html'
 
 
-def _get_articles() -> list:
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, 'html.parser')
+def get_articles() -> list:
+    soup = get_soup(URL)
     return soup.find_all('h3', class_='mod-title')
 
 
-def _update_articles(articles):
+def update_articles(articles):
     for article in articles:
         url = article.find('a')['href']
-        if Article.objects.filter(url=url).exists():
+        title = article.find('a').text
+        if not to_be_created(title, url):
             continue
-        Article(
-            title=article.find('a').text,
-            url=url,
-            source=SOURCE
-        ).save()
+
+        Article(title=title, url=url, source=SOURCE).save()
 
 
 def execute_marca_scraper():
-    articles = _get_articles()
-    _update_articles(articles)
+    articles = get_articles()
+    update_articles(articles)
