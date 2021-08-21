@@ -14,7 +14,7 @@ def get_articles() -> list:
 def update_articles(articles):
     for article in articles:
         url = article.find('a')['href']
-        title = article.find('a').text,
+        title = article.find('a').text
         if not to_be_created(title, url):
             continue
 
