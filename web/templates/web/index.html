@@ -4,63 +4,37 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Celta Novas</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
   <link rel="manifest" href="favicon/site.webmanifest" />
+  <link href="{% static 'bulma.min.css' %}" rel="stylesheet">
   <link href="{% static 'styles.css' %}" rel="stylesheet">
 </head>
 
-<body>
+<body class="has-background-black">
   {% block content %}
   <section class="section">
     <div class="container">
       <div class="columns is-desktop">
         <div class="column is-three-fifths is-offset-one-fifth">
+          <h3 class="title is-2 has-text-light">Celta Novas</h3>
           {% for article in page_obj %}
           <div class="card">
             <div class="card-content">
-              <a href="{{ article.url }}" target="blank"> {{ article.title }} </a>
+              <a class="has-text-light" href="{{ article.url }}" target="blank"> {{ article.title }} </a>
             </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  {{ article.source }}
-                </span>
-              </p>
-              <p class="card-footer-item">
-                <span>
-                  {{ article.created_at }}
-                </span>
-              </p>
-            </footer>
+            <div class="footer-items">
+              <span class="source has-text-light">{{ article.source }}</span>
+              <span class="has-text-light">{{ article.created_at|date:'Y-m-d' }}</span>
+            </div>
           </div>
           {% endfor %}
         </div>
       </div>
   </section>
-  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-    <ul class="pagination-list">
-      <li>
-        {% if page_obj.has_previous %}
-        <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">ANTERIOR</a>
-        {% else %}
-        <a class="pagination-previous" disabled>ANTERIOR</a>
-        {% endif %}
-      </li>
-      <li>
-        {% if page_obj.has_next %}
-        <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">SEGUINTE</a>
-        {% else %}
-        <a class="pagination-next" disabled>SEGUINTE</a>
-        {% endif %}
-      </li>
-
-    </ul>
-  </nav>
   </div>
   {% endblock %}
 </body>
