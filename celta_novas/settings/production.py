@@ -14,3 +14,6 @@ CACHES = {
         "KEY_PREFIX": "example"
     }
 }
+
+STATICFILES_STORAGE = \
+    'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
