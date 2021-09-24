@@ -19,7 +19,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-desktop">
-        <div class="column is-three-fifths is-offset-one-fifth">
+        <div class="column is-8 is-offset-2">
           <h3 class="title is-2 has-text-light">Celta Novas</h3>
           {% for article in page_obj %}
           <div class="card">
@@ -36,6 +36,54 @@
       </div>
   </section>
   </div>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-2"></div>
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-content">
+              <div class="content has-text-light">
+                <h4 class="title is-4 has-text-light">Artigos totais</h4>
+                <p>{{ total_articles }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-content">
+              <div class="content has-text-light">
+                <h4 class="title is-4 has-text-light">Artigos nas últimas 24 horas</h4>
+                <p>{{ articles_last_24_hours }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-content">
+              <div class="content has-text-light">
+                <h4 class="title is-4 has-text-light">Xornal con máis artigos</h4>
+                <p>{{ source_with_more_articles.source }}: {{ source_with_more_articles.number_of_articles }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-content">
+              <div class="content has-text-light">
+                <h4 class="title is-4 has-text-light">Xornal con máis artigos nas últimas 24 horas</h4>
+                <p>{{ source_with_more_articles_general.source }}: {{ source_with_more_articles_general.number_of_articles }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2"></div>
+      </div>
+    </div>
+  </section>
   {% endblock %}
 </body>
 
