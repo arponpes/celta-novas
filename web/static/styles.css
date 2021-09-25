@@ -7,6 +7,12 @@
     background-color: #1a1a1b;
 }
 
+.metric-card {
+    margin-top: 0.1rem;
+    background-color: #1a1a1b;
+    height: 100%;
+}
+
 .source {
     margin-right: 1rem;
 }
