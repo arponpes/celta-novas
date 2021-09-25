@@ -20,15 +20,16 @@
     <div class="container">
       <div class="columns is-desktop">
         <div class="column is-8 is-offset-2">
-          <h3 class="title is-2 has-text-light">Celta Novas</h3>
+          <h3 class="title is-3 has-text-light">Celta Novas</h3>
           {% for article in page_obj %}
           <div class="card">
             <div class="card-content">
-              <a class="has-text-light" href="{{ article.url }}" target="blank"> {{ article.title }} </a>
+              <h5 class="title is-5"><a class="has-text-light" href="{{ article.url }}" target="blank">
+                  {{ article.title }} </a></h5>
             </div>
             <div class="footer-items">
-              <span class="source has-text-light">{{ article.source }}</span>
-              <span class="has-text-light">{{ article.created_at|date:'Y-m-d' }}</span>
+              <span class="source tag is-dark">{{ article.source }}</span>
+              <span class="tag is-dark">{{ article.created_at|date:'Y-m-d' }}</span>
             </div>
           </div>
           {% endfor %}
@@ -64,7 +65,7 @@
           <div class="card">
             <div class="card-content">
               <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Xornal con máis artigos</h4>
+                <h4 class="title is-4 has-text-light">Xornal con máis artigos nas últimas 24 horas</h4>
                 <p>{{ source_with_more_articles.source }}: {{ source_with_more_articles.number_of_articles }}</p>
               </div>
             </div>
@@ -74,8 +75,9 @@
           <div class="card">
             <div class="card-content">
               <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Xornal con máis artigos nas últimas 24 horas</h4>
-                <p>{{ source_with_more_articles_general.source }}: {{ source_with_more_articles_general.number_of_articles }}</p>
+                <h4 class="title is-4 has-text-light">Xornal con máis artigos</h4>
+                <p>{{ source_with_more_articles_general.source }}:
+                  {{ source_with_more_articles_general.number_of_articles }}</p>
               </div>
             </div>
           </div>
