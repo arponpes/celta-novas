@@ -1,3 +1,4 @@
+from datetime import date
 from core.tests.factories import ArticleFactory
 from core.models import Article
 from rest_framework.test import APIClient
@@ -97,3 +98,27 @@ def test_get_articles_filtered_incorrect_source():
     )
     assert response.status_code == 400
     assert response.json() == expected_response
+
+
+@pytest.mark.django_db
+def test_get_articles_metrics():
+    ArticleFactory(source=Article.FARO_DE_VIGO)
+    ArticleFactory(source=Article.MARCA)
+    ArticleFactory(source=Article.MARCA)
+    old_article = ArticleFactory(source=Article.MARCA)
+    old_article.created_at = date(2020, 1, 1)
+    old_article.save()
+    expected_response = {
+        'total_articles': 4,
+        'articles_last_24_hours': 3,
+        'source_with_more_articles': {
+            'source': 'MARCA', 'source__count': 3
+            },
+        'source_with_more_articles_last_24_hours': {
+            'source': 'MARCA', 'source__count': 2
+            },
+        }
+    client = APIClient()
+    response = client.get(reverse('articles_metrics'))
+    assert response.status_code == 200
+    assert response.data == expected_response
