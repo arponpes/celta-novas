@@ -46,7 +46,7 @@
             <div class="card-content">
               <div class="content has-text-light">
                 <h4 class="title is-4 has-text-light">Artigos totais</h4>
-                <p>{{ total_articles }}</p>
+                <p>{{ article_metrics.total_articles }}</p>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
             <div class="card-content">
               <div class="content has-text-light">
                 <h4 class="title is-4 has-text-light">Artigos nas últimas 24 horas</h4>
-                <p>{{ articles_last_24_hours }}</p>
+                <p>{{ article_metrics.articles_last_24_hours }}</p>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
             <div class="card-content">
               <div class="content has-text-light">
                 <h4 class="title is-4 has-text-light">Xornal con máis artigos nas últimas 24 horas</h4>
-                <p>{{ source_with_more_articles.source }}: {{ source_with_more_articles.number_of_articles }}</p>
+                <p>{{ article_metrics.source_with_more_articles_last_24_hours.source }}: {{ article_metrics.source_with_more_articles_last_24_hours.source__count }}</p>
               </div>
             </div>
           </div>
@@ -76,8 +76,8 @@
             <div class="card-content">
               <div class="content has-text-light">
                 <h4 class="title is-4 has-text-light">Xornal con máis artigos</h4>
-                <p>{{ source_with_more_articles_general.source }}:
-                  {{ source_with_more_articles_general.number_of_articles }}</p>
+                <p>{{ article_metrics.source_with_more_articles.source }}:
+                  {{ article_metrics.source_with_more_articles.source__count }}</p>
               </div>
             </div>
           </div>
