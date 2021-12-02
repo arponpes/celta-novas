@@ -5,7 +5,7 @@ from core.models import Article
 from .serializers import ArticleSerializer
 from .filters import ArticleFilter
 import django_filters
-from .helpers.article_metrics_generator import ArticleMetricsGenerator
+from core.helpers.article_metrics_generator import ArticleMetricsGenerator
 
 
 class ArticleListView(ListAPIView):

@@ -15,12 +15,6 @@ class ArticleMetricsGenerator:
             'articles_last_24_hours'
         ] = self.get_articles_last_24_hours()
 
-        # TODO fix case no articles
-
-        articles_metrics[
-            'source_with_more_articles'
-        ] = self.get_sources_with_more_metrics()
-
         articles_metrics[
             'source_with_more_articles'
         ] = self.get_source_with_more_articles()
@@ -28,11 +22,6 @@ class ArticleMetricsGenerator:
         articles_metrics['source_with_more_articles_last_24_hours'] = \
             self.get_source_with_more_articles_last_24_hours()
         return articles_metrics
-
-    def get_sources_with_more_metrics(self) -> int:
-        return self.articles.values('source').annotate(
-            Count('source')
-        ).order_by('-source__count')[0]
 
     def get_total_articles(self) -> int:
         return self.articles.count()
@@ -42,18 +31,22 @@ class ArticleMetricsGenerator:
             created_at__gt=timezone.now() - timedelta(hours=24)
         ).count()
 
-    def get_source_with_more_articles(self) -> int:
-        return self.articles.values(
-                'source'
-            ).annotate(
-                Count('source')
-            ).order_by('-source__count')[0]
+    def get_source_with_more_articles(self) -> dict:
+        source_with_more_articles = self.articles.values('source').annotate(
+            Count('source')
+        ).order_by('-source__count')
+        if source_with_more_articles:
+            return source_with_more_articles[0]
+        return {'source': '', 'source__count': 0}
 
-    def get_source_with_more_articles_last_24_hours(self) -> int:
-        return self.articles.filter(
+    def get_source_with_more_articles_last_24_hours(self) -> dict:
+        source_with_more_articles_last_24_hours = self.articles.filter(
                     created_at__gte=timezone.now() - timedelta(hours=24)
                 ).values(
                     'source'
                 ).annotate(
                     Count('source')
-                ).order_by('-source__count')[0]
+                ).order_by('-source__count')
+        if source_with_more_articles_last_24_hours:
+            return source_with_more_articles_last_24_hours[0]
+        return {'source': '', 'source__count': 0}
