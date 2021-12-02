@@ -10,6 +10,7 @@ django-redis
 pillow
 requests
 django-filter
+psycopg2
 
 # Testing
 tox
