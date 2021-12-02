@@ -1,18 +1,22 @@
+# Main packages
+celery==5.2.*
+Django==3.2.*
+djangorestframework==3.12.*
+gunicorn==20.1.*
+redis==3.5.*
 BeautifulSoup4
-celery
-Django
-factory-boy
 django-celery-beat
 django-redis
-djangorestframework
-flake8
-gunicorn
 pillow
-psycopg2
-pytest
-pytest-django
-redis
 requests
-coverage
-pytest-cov
 django-filter
+
+# Testing
+tox
+pytest
+pytest-cov
+pytest-django
+pytest-sugar
+coverage
+flake8
+factory-boy
