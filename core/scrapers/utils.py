@@ -13,5 +13,12 @@ def to_be_created(title, url):
 
 
 def get_soup(url):
-    page = requests.get(url)
-    return BeautifulSoup(page.content, 'html.parser')
+    page_content = make_requests(url)
+    return BeautifulSoup(page_content, 'html.parser')
+
+
+def make_requests(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.content
+    return ''
