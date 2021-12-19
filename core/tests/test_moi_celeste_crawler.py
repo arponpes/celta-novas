@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 
-from core.scrapers.moi_celeste_scraper import MoiCelesteCrawler
+from core.crawlers.moi_celeste_crawler import MoiCelesteCrawler
 from core.models import Article
 
 
@@ -15,7 +15,7 @@ def mock_response():
 
 
 @pytest.mark.django_db
-def test_execute_mc_scraper(mocker, mock_response):
+def test_execute_mc_crawler(mocker, mock_response):
     mocker.patch("requests.get", return_value=mock_response)
     moi_celete_crawler = MoiCelesteCrawler()
     moi_celete_crawler.execute_crawler()

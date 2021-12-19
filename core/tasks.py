@@ -1,10 +1,10 @@
 import os
 import requests
 from celery import shared_task
-from core.scrapers.faro_de_vigo_scraper import FaroDeVigoCrawler
-from core.scrapers.la_voz_scraper import LaVozDeGaliciaCrawler
-from core.scrapers.marca_scraper import execute_marca_scraper
-from core.scrapers.moi_celeste_scraper import execute_mc_scraper
+from core.crawlers.faro_de_vigo_crawler import FaroDeVigoCrawler
+from core.crawlers.la_voz_de_galicia_crawler import LaVozDeGaliciaCrawler
+from core.crawlers.marca_crawler import MarcaCrawler
+from core.crawlers.moi_celeste_crawler import MoiCelesteCrawler
 from core.helpers.check_article_status import check_article_status
 
 
@@ -28,7 +28,8 @@ def task_lv_scraper():
 
 @shared_task
 def task_marca_scraper():
-    execute_marca_scraper()
+    marca_crawler = MarcaCrawler()
+    marca_crawler.execute_crawler()
     requests.get(
         f'https://hc-ping.com/{os.environ.get("marca_hc_ping")}', timeout=10
     )
@@ -36,7 +37,8 @@ def task_marca_scraper():
 
 @shared_task
 def task_mc_scraper():
-    execute_mc_scraper()
+    moi_celeste_crawler = MoiCelesteCrawler()
+    moi_celeste_crawler.execute_crawler()
     requests.get(
         f'https://hc-ping.com/{os.environ.get("mc_hc_ping")}', timeout=10
     )

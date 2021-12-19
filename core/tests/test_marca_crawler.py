@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 
-from core.scrapers.marca_scraper import MarcaCrawler
+from core.crawlers.marca_crawler import MarcaCrawler
 from core.models import Article
 
 
@@ -15,7 +15,7 @@ def mock_response():
 
 
 @pytest.mark.django_db
-def test_execute_marca_scraper(mocker, mock_response):
+def test_execute_marca_crawler(mocker, mock_response):
     mocker.patch('requests.get', return_value=mock_response)
     marca_crawler = MarcaCrawler()
     marca_crawler.execute_crawler()
