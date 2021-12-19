@@ -5,7 +5,7 @@ from .common import CrawlerBase
 
 class FaroDeVigoCrawler(CrawlerBase):
     source = Article.FARO_DE_VIGO
-    url_base = "https://www.fardevigo.es"
+    url_base = "https://galego.farodevigo.es/"
     url = f"{url_base}celta-de-vigo/"
 
     def get_article_url(self, article) -> str:
