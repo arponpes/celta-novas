@@ -18,7 +18,6 @@ def update_articles(articles):
         title = article.find('a').text.strip()
         if not to_be_created(title, url):
             continue
-
         Article(title=title, url=url, source=SOURCE).save()
 
 

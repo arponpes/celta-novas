@@ -9,7 +9,7 @@ from core.models import Article
 def mock_response():
     mock = Mock()
     mock.status_code = 200
-    with open('core/tests/html_mocks/marca.html', 'r') as f:
+    with open('core/tests/fixtures/marca.html', 'r') as f:
         mock.content = f.read()
     return mock
 
