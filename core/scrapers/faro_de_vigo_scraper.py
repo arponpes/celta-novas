@@ -8,6 +8,12 @@ class FaroDeVigoCrawler(CrawlerBase):
     url_base = "https://www.fardevigo.es"
     url = f"{url_base}celta-de-vigo/"
 
+    def get_article_url(self, article) -> str:
+        return f'{self.url_base}{article["href"]}'
+
+    def get_article_title(self, article) -> str:
+        return article.text.strip()
+
     def get_articles(self) -> list:
         soup = get_soup(self.url)
         articles = soup.find_all("article", class_="new")
