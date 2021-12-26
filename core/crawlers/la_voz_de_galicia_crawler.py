@@ -1,12 +1,15 @@
+import urllib.parse
+
 from core.models import Article
-from .utils import get_soup
+
 from .common import CrawlerBase
+from .utils import get_soup
 
 
 class LaVozDeGaliciaCrawler(CrawlerBase):
     source = Article.LA_VOZ_DE_GALICIA
     url_base = "https://www.lavozdegalicia.es/"
-    url = f"{url_base}gradario/"
+    url = urllib.parse.urljoin(url_base, "gradario/")
 
     def get_article_url(self, article) -> str:
         return f'{self.url_base}{article.find("a")["href"]}'

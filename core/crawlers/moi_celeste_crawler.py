@@ -1,6 +1,7 @@
 from core.models import Article
-from .utils import get_soup
+
 from .common import CrawlerBase
+from .utils import get_soup
 
 
 class MoiCelesteCrawler(CrawlerBase):

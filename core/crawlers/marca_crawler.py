@@ -1,6 +1,7 @@
 from core.models import Article
-from .utils import get_soup
+
 from .common import CrawlerBase
+from .utils import get_soup
 
 
 class MarcaCrawler(CrawlerBase):
@@ -8,11 +9,11 @@ class MarcaCrawler(CrawlerBase):
     url = "https://www.marca.com/futbol/celta.html"
 
     def get_article_url(self, article):
-        return article.find('a')['href']
+        return article.find("a")["href"]
 
     def get_article_title(self, article):
-        return article.find('a').text
+        return article.find("a").text
 
     def get_articles(self) -> list:
         soup = get_soup(self.url)
-        return soup.find_all('h3', class_='mod-title')
+        return soup.find_all("h3", class_="mod-title")
