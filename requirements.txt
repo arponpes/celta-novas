@@ -12,6 +12,7 @@ requests
 django-filter
 psycopg2
 url-normalize
+drf_yasg
 
 # Testing
 tox
