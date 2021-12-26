@@ -11,6 +11,7 @@ pillow
 requests
 django-filter
 psycopg2
+url-normalize
 
 # Testing
 tox
