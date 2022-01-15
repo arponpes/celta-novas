@@ -12,4 +12,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
-        script: source /home/aarondominguez/celta-novas-infra/docker_prod/deploy.sh
+        script: |
+          cd /home/aarondominguez/celta-novas-infra/docker_prod
+          ./deploy.sh
