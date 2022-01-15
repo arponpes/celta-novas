@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 
 import pytest
+
 from core.crawlers.la_voz_de_galicia_crawler import LaVozDeGaliciaCrawler
 from core.models import Article
 

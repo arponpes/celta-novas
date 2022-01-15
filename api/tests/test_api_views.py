@@ -1,9 +1,11 @@
 from datetime import date
-from core.tests.factories import ArticleFactory
-from core.models import Article
-from rest_framework.test import APIClient
-from django.urls.base import reverse
+
 import pytest
+from django.urls.base import reverse
+from rest_framework.test import APIClient
+
+from core.models import Article
+from core.tests.factories import ArticleFactory
 
 
 @pytest.mark.django_db

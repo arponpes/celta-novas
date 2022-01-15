@@ -1,8 +1,10 @@
-import pytest
 import datetime
-from core.models import Article
-from api.serializers import ArticleSerializer
+
+import pytest
 from rest_framework.exceptions import ValidationError
+
+from api.serializers import ArticleSerializer
+from core.models import Article
 
 
 @pytest.mark.django_db

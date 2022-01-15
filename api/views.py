@@ -1,11 +1,13 @@
-from rest_framework.views import APIView
+import django_filters
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-from core.models import Article
-from .serializers import ArticleSerializer
-from .filters import ArticleFilter
-import django_filters
+from rest_framework.views import APIView
+
 from core.helpers.article_metrics_generator import ArticleMetricsGenerator
+from core.models import Article
+
+from .filters import ArticleFilter
+from .serializers import ArticleSerializer
 
 
 class ArticleListView(ListAPIView):

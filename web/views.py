@@ -1,6 +1,6 @@
 from django.views.generic import ListView
-from core.helpers.article_metrics_generator import ArticleMetricsGenerator
 
+from core.helpers.article_metrics_generator import ArticleMetricsGenerator
 from core.models import Article
 
 

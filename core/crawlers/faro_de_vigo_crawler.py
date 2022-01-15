@@ -3,10 +3,10 @@ import urllib.parse
 from core.models import Article
 
 from .common import CrawlerBase
-from .utils import get_soup
+from .mixings import CrawlerMixin
 
 
-class FaroDeVigoCrawler(CrawlerBase):
+class FaroDeVigoCrawler(CrawlerBase, CrawlerMixin):
     source = Article.FARO_DE_VIGO
     url_base = "https://galego.farodevigo.es/"
     url = urllib.parse.urljoin(url_base, "celta-de-vigo/")
@@ -18,7 +18,7 @@ class FaroDeVigoCrawler(CrawlerBase):
         return article.text.strip()
 
     def get_articles(self) -> list:
-        soup = get_soup(self.url)
+        soup = self.get_soup(self.url)
         articles = soup.find_all("article", class_="new")
         celta_articles = []
         for article in articles:

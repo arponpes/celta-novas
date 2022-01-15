@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 
 import pytest
+
 from core.crawlers.faro_de_vigo_crawler import FaroDeVigoCrawler
 from core.models import Article
 

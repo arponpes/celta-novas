@@ -6,7 +6,6 @@ from rest_framework import permissions
 
 from .views import ArticleListView, ArticlesMetricsView
 
-
 schema_view = get_schema_view(
     openapi.Info(
         title="Celta novas API",

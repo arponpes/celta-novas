@@ -1,9 +1,10 @@
+from datetime import date
+
 import pytest
 
-from core.tests.factories import ArticleFactory
 from core.helpers.article_metrics_generator import ArticleMetricsGenerator
 from core.models import Article
-from datetime import date
+from core.tests.factories import ArticleFactory
 
 
 class TestArticleMetricsGenerator:
@@ -45,17 +46,13 @@ class TestArticleMetricsGenerator:
         ArticleFactory(source=Article.FARO_DE_VIGO)
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
-        assert article_generator.get_source_with_more_articles() == {
-            'source': 'MARCA', 'source__count': 2
-        }
+        assert article_generator.get_source_with_more_articles() == {"source": "MARCA", "source__count": 2}
 
     @pytest.mark.django_db
     def test_get_source_with_more_articles_zero_articles(self):
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
-        assert article_generator.get_source_with_more_articles() == {
-            'source': '', 'source__count': 0
-        }
+        assert article_generator.get_source_with_more_articles() == {"source": "", "source__count": 0}
 
     @pytest.mark.django_db
     def test_get_source_with_more_articles_last_24_hours(self):
@@ -67,12 +64,13 @@ class TestArticleMetricsGenerator:
         old_article.save()
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
-        assert article_generator.get_source_with_more_articles_last_24_hours(
-            ) == {'source': 'MARCA', 'source__count': 2}
+        assert article_generator.get_source_with_more_articles_last_24_hours() == {
+            "source": "MARCA",
+            "source__count": 2,
+        }
 
     @pytest.mark.django_db
     def test_get_source_with_more_articles_last_24_hours_zero_articles(self):
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
-        assert article_generator.get_source_with_more_articles_last_24_hours(
-            ) == {'source': '', 'source__count': 0}
+        assert article_generator.get_source_with_more_articles_last_24_hours() == {"source": "", "source__count": 0}

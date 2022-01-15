@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 
 import pytest
+
 from core.crawlers.moi_celeste_crawler import MoiCelesteCrawler
 from core.models import Article
 
