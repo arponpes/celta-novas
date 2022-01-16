@@ -59,6 +59,17 @@ class TestMoiCelesteCrawler:
         moi_celeste_crawler.update_articles(articles)
         assert Article.objects.count() == 25
 
+    @pytest.mark.django_db
+    def test_get_article_image(self, mocker, mock_response, moi_celeste_crawler):
+        mocker.patch("requests.get", return_value=mock_response)
+        articles = moi_celeste_crawler.get_articles()
+        assert (
+            moi_celeste_crawler.get_article_img(articles[0])
+            == "https://blogger.googleusercontent.com/img/a/AVvXsEhp_nsWJlxVew6KY0SxDtALsQikzdHh76or3mRKAOgPJt68Gs3c"
+            "WxAbL6lq9IaEhyLn_tQ8wQGlRngccj0mdXMvEtDCpujfsRNCyqUOuuUsHPhmfN2s4krY14O0rNXd7W5X_RSHXFm98D5HO"
+            "cYgL-U9rMZDoE74gmn_WRYqqYHgqC3mVeI_FfVOj9Pl6A=w640-h442"
+        )
+
 
 @pytest.mark.django_db
 def test_execute_moi_celeste_crawler(mocker, mock_response, moi_celeste_crawler):

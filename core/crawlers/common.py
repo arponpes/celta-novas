@@ -19,10 +19,15 @@ class CrawlerBase:
     def get_article_title(self, article) -> str:
         raise NotImplementedError
 
+    def get_article_img(self, article):
+        pass
+
     def update_articles(self, articles):
         for article in articles:
             url = self.normalize_url(self.get_article_url(article))
             title = self.get_article_title(article)
+
+            print(self.get_article_img(article))
             if not self.to_be_created(title, url):
                 continue
 
