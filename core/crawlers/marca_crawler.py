@@ -1,10 +1,9 @@
 from core.models import Article
 
 from .common import CrawlerBase
-from .mixings import CrawlerMixin
 
 
-class MarcaCrawler(CrawlerBase, CrawlerMixin):
+class MarcaCrawler(CrawlerBase):
     source = Article.MARCA
     url = "https://www.marca.com/futbol/celta.html"
 

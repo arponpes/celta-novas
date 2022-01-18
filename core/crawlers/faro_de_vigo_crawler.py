@@ -3,10 +3,9 @@ import urllib.parse
 from core.models import Article
 
 from .common import CrawlerBase
-from .mixings import CrawlerMixin
 
 
-class FaroDeVigoCrawler(CrawlerBase, CrawlerMixin):
+class FaroDeVigoCrawler(CrawlerBase):
     source = Article.FARO_DE_VIGO
     url_base = "https://galego.farodevigo.es/"
     url = urllib.parse.urljoin(url_base, "celta-de-vigo/")

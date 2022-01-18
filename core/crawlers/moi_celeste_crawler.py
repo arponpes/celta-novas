@@ -1,10 +1,9 @@
 from core.models import Article
 
 from .common import CrawlerBase
-from .mixings import CrawlerMixin
 
 
-class MoiCelesteCrawler(CrawlerBase, CrawlerMixin):
+class MoiCelesteCrawler(CrawlerBase):
     source = Article.MOI_CELESTE
     url = "http://www.moiceleste.com/"
 
