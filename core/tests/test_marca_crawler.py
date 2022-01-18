@@ -39,7 +39,7 @@ class TestMarcaCrawler:
     def test_get_articles(self, mocker, mock_response, marca_crawler):
         mocker.patch("requests.get", return_value=mock_response)
         articles = marca_crawler.get_articles()
-        assert len(articles) == 50
+        assert len(articles) == 42
 
     @pytest.mark.django_db
     def test_update_articles(self, mocker, mock_response, marca_crawler):
@@ -47,7 +47,7 @@ class TestMarcaCrawler:
         articles = set(marca_crawler.get_articles())
         assert Article.objects.count() == 0
         marca_crawler.update_articles(articles)
-        assert Article.objects.count() == 50
+        assert Article.objects.count() == 42
 
     @pytest.mark.django_db
     def test_update_articles_avoid_duplicates(self, mocker, mock_response, marca_crawler):
@@ -55,9 +55,19 @@ class TestMarcaCrawler:
         articles = marca_crawler.get_articles()
         assert Article.objects.count() == 0
         marca_crawler.update_articles(articles)
-        assert Article.objects.count() == 50
+        assert Article.objects.count() == 42
         marca_crawler.update_articles(articles)
-        assert Article.objects.count() == 50
+        assert Article.objects.count() == 42
+
+    @pytest.mark.django_db
+    def test_get_article_image(self, mocker, mock_response, marca_crawler):
+        mocker.patch("requests.get", return_value=mock_response)
+        articles = marca_crawler.get_articles()
+        assert (
+            marca_crawler.get_article_img(articles[0])
+            == "https://phantom-marca.unidadeditorial.es/72c9e239d4d72b736142a8f89848ab95/f/webp/"
+            "assets/multimedia/imagenes/2021/12/25/16404543713280_310x174.jpg"
+        )
 
 
 @pytest.mark.django_db

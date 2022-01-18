@@ -8,11 +8,14 @@ class MarcaCrawler(CrawlerBase):
     url = "https://www.marca.com/futbol/celta.html"
 
     def get_article_url(self, article):
-        return article.find("a")["href"]
+        return article.find("h3").find("a")["href"]
 
     def get_article_title(self, article):
-        return article.find("a").text
+        return article.find("h3").find("a").text
+
+    def get_article_img(self, article):
+        return article.find("picture").find("source")["srcset"].strip()
 
     def get_articles(self) -> list:
         soup = self.get_soup(self.url)
-        return soup.find_all("h3", class_="mod-title")
+        return soup.find_all("article", class_="mod-item mod-futbol")
