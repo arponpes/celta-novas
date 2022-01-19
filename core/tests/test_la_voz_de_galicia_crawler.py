@@ -62,6 +62,16 @@ class TestLaVozDeGaliciaCrawler:
         la_voz_de_galicia_crawler.update_articles(articles)
         assert Article.objects.count() == 48
 
+    @pytest.mark.django_db
+    def test_get_article_image(self, mocker, mock_response, la_voz_de_galicia_crawler):
+        mocker.patch("requests.get", return_value=mock_response)
+        articles = la_voz_de_galicia_crawler.get_articles()
+        assert (
+            la_voz_de_galicia_crawler.get_article_img(articles[0]).strip()
+            == "https://cflvdg.avoz.es/sc/ZYbdY4WqJmCau-YBzXVRgZUigak=/450x/2021/12/24/"
+            "00121640366288246778661/Foto/54353454543534.JPG"
+        )
+
 
 @pytest.mark.django_db
 def test_execute_lv_crawler(mocker, mock_response):

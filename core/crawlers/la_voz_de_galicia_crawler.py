@@ -11,11 +11,17 @@ class LaVozDeGaliciaCrawler(CrawlerBase):
     url = urllib.parse.urljoin(url_base, "gradario/")
 
     def get_article_url(self, article) -> str:
-        return f'{self.url_base}{article.find("a")["href"]}'
+        return f'{self.url_base}{article.find("h2").find("a")["href"]}'
 
     def get_article_title(self, article) -> str:
-        return article.find("a").text.strip()
+        return article.find("h2").find("a").text.strip()
+
+    def get_article_img(self, article):
+        figure = article.find("figure")
+        if not figure:
+            return ""
+        return figure.find("span").find("source")["srcset"]
 
     def get_articles(self) -> list:
         soup = self.get_soup(self.url)
-        return soup.find_all("h2", itemprop="headline")
+        return soup.find_all("article", class_="item")
