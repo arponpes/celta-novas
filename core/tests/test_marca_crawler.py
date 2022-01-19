@@ -64,7 +64,7 @@ class TestMarcaCrawler:
         mocker.patch("requests.get", return_value=mock_response)
         articles = marca_crawler.get_articles()
         assert (
-            marca_crawler.get_article_img(articles[0])
+            marca_crawler.get_article_img(articles[0].strip())
             == "https://phantom-marca.unidadeditorial.es/72c9e239d4d72b736142a8f89848ab95/f/webp/"
             "assets/multimedia/imagenes/2021/12/25/16404543713280_310x174.jpg"
         )

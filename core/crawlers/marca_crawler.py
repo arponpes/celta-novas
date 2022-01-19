@@ -14,7 +14,7 @@ class MarcaCrawler(CrawlerBase):
         return article.find("h3").find("a").text
 
     def get_article_img(self, article):
-        return article.find("picture").find("source")["srcset"].strip()
+        return article.find("picture").find("source").get("srcset")
 
     def get_articles(self) -> list:
         soup = self.get_soup(self.url)
