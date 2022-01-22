@@ -10,82 +10,37 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
   <link rel="manifest" href="favicon/site.webmanifest" />
-  <link href="{% static 'bulma.min.css' %}" rel="stylesheet">
-  <link href="{% static 'styles.css' %}" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="has-background-black">
+<body class="bg-[#030303]">
   {% block content %}
-  <section class="section">
-    <div class="container">
-      <div class="columns is-desktop">
-        <div class="column is-8 is-offset-2">
-          <h3 id="page-title" class="title is-3">Celta Novas</h3>
-          {% for article in page_obj %}
-          <div class="card">
-            <div class="card-content">
-              <h5 class="title is-5"><a class="has-text-light" href="{{ article.url }}" target="blank">
-                  {{ article.title }} </a></h5>
-            </div>
-            <div class="footer-items">
-              <span class="source tag is-dark">{{ article.source }}</span>
-              <span class="tag is-dark">{{ article.created_at|date:'Y-m-d' }}</span>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
+
+  <h3 class="max-w-md mx-auto md:max-w-4xl mb-6 mt-8 text-sky-400 text-5xl font-semibold">
+    Celta Novas
+  </h3>
+  {% for article in page_obj %}
+  <div class="max-w-md mx-auto bg-[#1a1a1b] rounded-xl shadow-md overflow-hidden md:max-w-4xl mb-6">
+    <div class="md:flex border border-solid border-[#343536]">
+      <div class="md:shrink-0">
+        <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ article.image_url }}"
+          alt="{{ article.title }}" />
       </div>
-  </section>
-  </div>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-2"></div>
-        <div class="column is-2">
-          <div class="card metric-card">
-            <div class="card-content">
-              <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Artigos totais</h4>
-                <p>{{ article_metrics.total_articles }}</p>
-              </div>
-            </div>
-          </div>
+      <div class="p-8">
+        <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
+          {{ article.source }}
         </div>
-        <div class="column is-2">
-          <div class="card metric-card">
-            <div class="card-content">
-              <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Artigos nas últimas 24 horas</h4>
-                <p>{{ article_metrics.articles_last_24_hours }}</p>
-              </div>
-            </div>
-          </div>
+        <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
+          {{ article.created_at|date:'Y-m-d' }}
         </div>
-        <div class="column is-2">
-          <div class="card metric-card">
-            <div class="card-content">
-              <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Xornal con máis artigos nas últimas 24 horas</h4>
-                <p>{{ article_metrics.source_with_more_articles_last_24_hours.source }}: {{ article_metrics.source_with_more_articles_last_24_hours.source__count }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-2">
-          <div class="card metric-card">
-            <div class="card-content">
-              <div class="content has-text-light">
-                <h4 class="title is-4 has-text-light">Xornal con máis artigos</h4>
-                <p>{{ article_metrics.source_with_more_articles.source }}:
-                  {{ article_metrics.source_with_more_articles.source__count }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-2"></div>
+        <a class="block mt-1 text-lg leading-tight font-medium text-black hover:underline text-white"
+          href="{{ article.url }}" target="blank">
+          {{ article.title }}
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+  {% endfor %}
   {% endblock %}
 </body>
 
