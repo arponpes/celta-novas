@@ -186,3 +186,7 @@ LOGGING = {
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 REST_FRAMEWORK = {"DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination", "PAGE_SIZE": 1000}
+
+DEFAULT_IMAGE = (
+    "https://cflvdg.avoz.es/sc/RBtphA7OHdc-Dpr4gmqXjiu9z7Y=/450x/2022/01/22/00121642860841634658426/Foto/V08E2011.jpg"
+)

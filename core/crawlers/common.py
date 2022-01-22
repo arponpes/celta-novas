@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from core.models import Article
+from django.conf import settings
 from url_normalize import url_normalize
 
 
@@ -25,7 +26,7 @@ class CrawlerBase:
         for article in articles:
             url = self.normalize_url(self.get_article_url(article))
             title = self.get_article_title(article)
-            image_url = self.get_article_img(article)
+            image_url = self.get_article_img(article) or settings.DEFAULT_IMAGE
             if not self.to_be_created(title, url):
                 continue
 
