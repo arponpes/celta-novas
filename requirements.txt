@@ -13,6 +13,7 @@ django-filter
 psycopg2
 url-normalize
 drf_yasg
+sentry-sdk
 
 # Testing
 tox
