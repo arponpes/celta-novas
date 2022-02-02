@@ -8,7 +8,7 @@ Celta novas gets the articles related to the Celta de Vigo football team from fo
 
 ## API
 
-[API documentation](https://celtanovas.dev/api/swagger/)
+[API documentation](https://celtanovas.dev/api/documentation/)
 
 
 ## Getting Started

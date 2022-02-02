@@ -22,6 +22,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("articles", cache_page(15 * 30)(ArticleListView.as_view()), name="articles"),
     path("articles_metrics", ArticlesMetricsView.as_view(), name="articles_metrics"),
-    re_path(r"^swagger(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
-    re_path(r"^swagger/$", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
+    re_path(r"^documentation(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
+    re_path(r"^documentation/$", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
 ]
