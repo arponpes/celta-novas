@@ -1,9 +1,9 @@
 # Main packages
 celery==5.2.*
-Django==3.2.*
-djangorestframework==3.12.*
+Django==4.0.2
+djangorestframework==3.13.*
 gunicorn==20.1.*
-redis==3.5.*
+redis==4.1.*
 BeautifulSoup4
 django-celery-beat
 django-redis
@@ -12,7 +12,7 @@ requests
 django-filter
 psycopg2
 url-normalize
-drf_yasg
+drf-spectacular
 sentry-sdk
 
 # Testing

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "drf_yasg",
+    "drf_spectacular",
     "celery",
     "django_celery_beat",
     "rest_framework",
@@ -185,7 +185,17 @@ LOGGING = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-REST_FRAMEWORK = {"DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination", "PAGE_SIZE": 1000}
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 1000,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "CELTANOVAS API",
+    "DESCRIPTION": "Celta novas is a news aggregator that aggregates news of RCCelta from multiple sources.",
+    "VERSION": "1.0.0",
+}
 
 DEFAULT_IMAGE = (
     "https://cflvdg.avoz.es/sc/RBtphA7OHdc-Dpr4gmqXjiu9z7Y=/450x/2022/01/22/00121642860841634658426/Foto/V08E2011.jpg"
