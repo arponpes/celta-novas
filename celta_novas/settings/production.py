@@ -1,7 +1,9 @@
+import os
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-from .base import *
+from .base import *  # noqa
 
 DEBUG = False
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
@@ -20,7 +22,7 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 
 sentry_sdk.init(
-    dsn="https://ef8b0fdf0c974a2095a01dc401a25494@o946165.ingest.sentry.io/6176506",
+    dsn=os.getenv("SENTRY_DSN"),
     integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
