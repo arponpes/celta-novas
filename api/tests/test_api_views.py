@@ -1,11 +1,10 @@
 from datetime import date
 
 import pytest
-from django.urls.base import reverse
-from rest_framework.test import APIClient
-
 from core.models import Article
 from core.tests.factories import ArticleFactory
+from django.urls.base import reverse
+from rest_framework.test import APIClient
 
 
 @pytest.mark.django_db
@@ -14,29 +13,23 @@ def test_get_articles():
     article_2 = ArticleFactory()
     expected_results = [
         {
-            'title': article_1.title,
-            'url': article_1.url,
-            'source': article_1.source,
-            'created_at': article_1.created_at.strftime(
-                '%Y-%m-%dT%H:%M:%S.%fZ'
-            )
-        }, {
-            'title': article_2.title,
-            'url': article_2.url,
-            'source': article_2.source,
-            'created_at': article_2.created_at.strftime(
-                '%Y-%m-%dT%H:%M:%S.%fZ'
-            )
-        }
+            "title": article_1.title,
+            "url": article_1.url,
+            "source": article_1.source,
+            "image_url": article_1.image_url,
+            "created_at": article_1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+        },
+        {
+            "title": article_2.title,
+            "url": article_2.url,
+            "source": article_2.source,
+            "image_url": article_2.image_url,
+            "created_at": article_2.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+        },
     ]
-    expected_response = {
-        'count': 2,
-        'next': None,
-        'previous': None,
-        'results': expected_results
-    }
+    expected_response = {"count": 2, "next": None, "previous": None, "results": expected_results}
     client = APIClient()
-    response = client.get(reverse('articles'))
+    response = client.get(reverse("articles"))
     assert response.status_code == 200
     assert response.json() == expected_response
 
@@ -45,17 +38,15 @@ def test_get_articles():
 def test_post_article():
     article = ArticleFactory()
     data = {
-            'title': article.title,
-            'url': article.url,
-            'source': article.source,
-            'created_at': article.created_at.strftime(
-                '%Y-%m-%dT%H:%M:%S.%fZ'
-            )
-        }
+        "title": article.title,
+        "url": article.url,
+        "source": article.source,
+        "created_at": article.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+    }
     client = APIClient()
-    response = client.post(reverse('articles'), data)
+    response = client.post(reverse("articles"), data)
     assert response.status_code == 405
-    assert response.json() == {'detail': 'Method "POST" not allowed.'}
+    assert response.json() == {"detail": 'Method "POST" not allowed.'}
 
 
 @pytest.mark.django_db
@@ -64,24 +55,16 @@ def test_get_articles_filtered():
     ArticleFactory(source=Article.MARCA)
     expected_results = [
         {
-            'title': article_1.title,
-            'url': article_1.url,
-            'source': article_1.source,
-            'created_at': article_1.created_at.strftime(
-                '%Y-%m-%dT%H:%M:%S.%fZ'
-            )
+            "title": article_1.title,
+            "url": article_1.url,
+            "source": article_1.source,
+            "image_url": article_1.image_url,
+            "created_at": article_1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
         }
     ]
-    expected_response = {
-        'count': 1,
-        'next': None,
-        'previous': None,
-        'results': expected_results
-    }
+    expected_response = {"count": 1, "next": None, "previous": None, "results": expected_results}
     client = APIClient()
-    response = client.get(
-        reverse('articles'), data={'source': Article.FARO_DE_VIGO}
-    )
+    response = client.get(reverse("articles"), data={"source": Article.FARO_DE_VIGO})
     assert response.status_code == 200
     assert response.json() == expected_response
 
@@ -90,14 +73,9 @@ def test_get_articles_filtered():
 def test_get_articles_filtered_incorrect_source():
     ArticleFactory(source=Article.FARO_DE_VIGO)
     ArticleFactory(source=Article.MARCA)
-    expected_response = {
-        'source':
-        ['Select a valid choice. foo is not one of the available choices.']
-    }
+    expected_response = {"source": ["Select a valid choice. foo is not one of the available choices."]}
     client = APIClient()
-    response = client.get(
-        reverse('articles'), data={'source': 'foo'}
-    )
+    response = client.get(reverse("articles"), data={"source": "foo"})
     assert response.status_code == 400
     assert response.json() == expected_response
 
@@ -111,16 +89,12 @@ def test_get_articles_metrics():
     old_article.created_at = date(2020, 1, 1)
     old_article.save()
     expected_response = {
-        'total_articles': 4,
-        'articles_last_24_hours': 3,
-        'source_with_more_articles': {
-            'source': 'MARCA', 'source__count': 3
-            },
-        'source_with_more_articles_last_24_hours': {
-            'source': 'MARCA', 'source__count': 2
-            },
-        }
+        "total_articles": 4,
+        "articles_last_24_hours": 3,
+        "source_with_more_articles": {"source": "MARCA", "source__count": 3},
+        "source_with_more_articles_last_24_hours": {"source": "MARCA", "source__count": 2},
+    }
     client = APIClient()
-    response = client.get(reverse('articles_metrics'))
+    response = client.get(reverse("articles_metrics"))
     assert response.status_code == 200
     assert response.data == expected_response
