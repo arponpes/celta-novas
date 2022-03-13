@@ -6,12 +6,11 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
+    - name: Execute deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
-          cd /home/aarondominguez/celta-novas-infra/docker_prod
-          ./deploy.sh
+          python3 /home/aarondominguez/celta-novas-infra/docker_prod/deploy.py
