@@ -13,4 +13,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
-          python3 /home/aarondominguez/celta-novas-infra/docker_prod/deploy.py
+          python3 /home/aarondominguez/celta-novas-infra/scripts/deploy.py
