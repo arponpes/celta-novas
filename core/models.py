@@ -15,8 +15,8 @@ class Article(models.Model):
     )
 
     title = models.CharField(max_length=200)
-    url = models.CharField(max_length=300)
-    image_url = models.CharField(max_length=300, null=True)
+    url = models.CharField(max_length=500)
+    image_url = models.CharField(max_length=1000, null=True)
     source = models.CharField(max_length=30, choices=SOURCE_CHOICES)
     created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
 
