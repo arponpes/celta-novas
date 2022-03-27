@@ -1,9 +1,10 @@
 name: Db dump
+
 on:
   schedule:
   - cron: "0 0 * * *"
-jobs:
 
+jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -16,4 +17,4 @@ jobs:
         key: ${{ secrets.KEY }}
         script: |
           python3 /celta-novas/celta-novas-infra/scripts/backup.py
-          ls /celta-novas/celta-novas-infra/backups
+          ls /backups
