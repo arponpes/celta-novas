@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "channels",
     "drf_spectacular",
     "celery",
     "django_celery_beat",
@@ -76,6 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "celta_novas.wsgi.application"
+ASGI_APPLICATION = "celta_novas.asgi.application"
 
 
 # Database
@@ -96,18 +98,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
 
@@ -174,11 +168,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {
-            "handlers": ["file_info", "file_error"],
-            "level": "INFO",
-            "propagate": True,
-        },
+        "django": {"handlers": ["file_info", "file_error"], "level": "INFO", "propagate": True,},
         "celery": {"handlers": ["celery"], "level": "INFO", "propagate": True},
     },
 }

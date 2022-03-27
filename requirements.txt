@@ -4,6 +4,7 @@ Django==4.0.2
 djangorestframework==3.13.*
 gunicorn==20.1.*
 redis==4.1.*
+channels
 BeautifulSoup4
 django-celery-beat
 django-redis
