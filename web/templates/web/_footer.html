@@ -1,0 +1,24 @@
+{% url 'home' as home_url %}
+{% url 'stats' as stats_url %}
+<footer
+    class="w-screen p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+    <ul
+        class="max-w-md mx-auto md:max-w-4xl mb-6 mt-8 md:inline-flex md:items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li class="">
+            © 2022 <a href="{% url 'home' %}" class="hover:underline">Celta Novas</a>. Non hai dereitos nin
+            nada.
+        </li>
+        <li class="">
+            <a class="md:p-4 py-2 block " href="https://github.com/arponpes/celta-novas">Github</a>
+        </li>
+        <li class="">
+            <a class="md:p-4 py-2 block " href="https://www.linkedin.com/in/aaron-dominguez-diez/">Feito por: Aaron
+                Dominguez</a>
+
+        </li>
+        <li class="">
+            <a class="md:p-4 py-2 block {% if request.get_full_path == stats_url %}text-purple-400{% endif %}"
+                href="{% url 'stats' %}">Estatísticas</a>
+        </li>
+    </ul>
+</footer>

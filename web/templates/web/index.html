@@ -1,60 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="gl">
-
-<head>
-  <meta charset="utf-8" />
-  <title>Celta Novas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
-  <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
-  <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png' %}">
-  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon/apple-icon-76x76.png' %}">
-  <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicon/apple-icon-114x114.png' %}">
-  <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon/apple-icon-120x120.png' %}">
-  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicon/apple-icon-144x144.png' %}">
-  <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon/apple-icon-152x152.png' %}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-icon-180x180.png' %}">
-  <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'favicon/android-icon-192x192.png' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-  <link rel="manifest" href="favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-[#030303]">
-  {% block content %}
-
-  <h3 class="max-w-md mx-auto md:max-w-4xl mb-6 mt-8 text-sky-400 text-5xl font-semibold">
-    Celta Novas
-  </h3>
-  {% for article in page_obj %}
-  <div class="max-w-md mx-auto bg-[#1a1a1b] rounded-xl shadow-md overflow-hidden md:max-w-4xl mb-6">
-    <div class="md:flex border border-solid border-[#343536]">
-      <div class="md:shrink-0">
-        <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ article.image_url }}"
-          alt="{{ article.title }}" />
+{% extends 'web/base.html' %}
+{% block content %}
+{% for article in page_obj %}
+<div class="max-w-md mx-auto bg-[#1a1a1b] rounded-xl shadow-md overflow-hidden md:max-w-4xl mb-6">
+  <div class="md:flex border border-solid border-[#343536]">
+    <div class="md:shrink-0">
+      <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ article.image_url }}" alt="{{ article.title }}" />
+    </div>
+    <div class="p-8">
+      <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
+        {{ article.source }}
       </div>
-      <div class="p-8">
-        <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
-          {{ article.source }}
-        </div>
-        <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
-          {{ article.created_at|date:'Y-m-d' }}
-        </div>
-        <a class="block mt-1 text-lg leading-tight font-medium text-black hover:underline text-white"
-          href="{{ article.url }}" target="blank">
-          {{ article.title }}
-        </a>
+      <div class="uppercase tracking-wide text-sm text-[#ea97cf] font-semibold">
+        {{ article.created_at|date:'Y-m-d' }}
       </div>
+      <a class="block mt-1 text-lg leading-tight font-medium text-black hover:underline text-white"
+        href="{{ article.url }}" target="blank">
+        {{ article.title }}
+      </a>
     </div>
   </div>
-  {% endfor %}
-  {% endblock %}
-</body>
-
-</html>
+</div>
+{% endfor %} {% endblock %}

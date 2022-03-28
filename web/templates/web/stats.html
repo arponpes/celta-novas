@@ -1,0 +1,11 @@
+{% extends 'web/base.html' %}{% load static %}
+{% block content %}
+
+<h3 class="max-w-md mx-auto md:max-w-4xl mb-6 mt-8 text-sky-400 text-5xl font-semibold">
+    Eiqui vai haber estatisticas e cousas asi ben guapas
+</h3>
+<canvas id="chart" width="800" height="450"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}
