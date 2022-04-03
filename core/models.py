@@ -22,3 +22,8 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.source}"
+
+    class Meta:
+        indexes = [
+            models.Index(name="article_source_index", fields=["title", "-created_at"]),
+        ]
