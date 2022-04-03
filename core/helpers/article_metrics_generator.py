@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from core import models
 from django.db.models import Count
 from django.utils import timezone
 
@@ -17,6 +18,8 @@ class ArticleMetricsGenerator:
         articles_metrics["source_with_more_articles"] = self.get_source_with_more_articles()
 
         articles_metrics["source_with_more_articles_last_24_hours"] = self.get_source_with_more_articles_last_24_hours()
+        articles_metrics["articles_by_source"] = self.get_articles_by_source()
+
         return articles_metrics
 
     def get_total_articles(self) -> int:
@@ -41,3 +44,9 @@ class ArticleMetricsGenerator:
         if source_with_more_articles_last_24_hours:
             return source_with_more_articles_last_24_hours[0]
         return {"source": "", "source__count": 0}
+
+    def get_articles_by_source(self) -> dict:
+        articles_by_source = {}
+        for source in models.Article.SOURCE_CHOICES:
+            articles_by_source[source[0]] = self.articles.filter(source=source[0]).count()
+        return articles_by_source

@@ -93,6 +93,7 @@ def test_get_articles_metrics():
         "articles_last_24_hours": 3,
         "source_with_more_articles": {"source": "MARCA", "source__count": 3},
         "source_with_more_articles_last_24_hours": {"source": "MARCA", "source__count": 2},
+        "articles_by_source": {"FARO DE VIGO": 1, "LA VOZ DE GALICIA": 0, "MARCA": 3, "MOI CELESTE": 0},
     }
     client = APIClient()
     response = client.get(reverse("articles_metrics"))
