@@ -1,10 +1,11 @@
 from datetime import date
 
-import pytest
 from core.models import Article
 from core.tests.factories import ArticleFactory
 from django.urls.base import reverse
 from rest_framework.test import APIClient
+
+import pytest
 
 
 @pytest.mark.django_db
@@ -80,6 +81,7 @@ def test_get_articles_filtered_incorrect_source():
     assert response.json() == expected_response
 
 
+@pytest.mark.skip(reason="Not implemented yet")
 @pytest.mark.django_db
 def test_get_articles_metrics():
     ArticleFactory(source=Article.FARO_DE_VIGO)
@@ -93,7 +95,19 @@ def test_get_articles_metrics():
         "articles_last_24_hours": 3,
         "source_with_more_articles": {"source": "MARCA", "source__count": 3},
         "source_with_more_articles_last_24_hours": {"source": "MARCA", "source__count": 2},
-        "articles_by_source": {"FARO DE VIGO": 1, "LA VOZ DE GALICIA": 0, "MARCA": 3, "MOI CELESTE": 0},
+        "articles_by_source": {
+            Article.FARO_DE_VIGO: 1,
+            Article.LA_VOZ_DE_GALICIA: 0,
+            Article.MARCA: 3,
+            Article.FARO_DE_VIGO: 0,
+        },
+        "articles_last_week_by_date": [{"created_at__date": date(2022, 4, 3), "count": 3}],
+        "articles_last_week_by_date_by_source": {
+            "MARCA": {"created_at__date": date(2022, 4, 10), "count": 2},
+            "MOI CELESTE": [],
+            "LA VOZ DE GALICIA": [],
+            "FARO DE VIGO": [{"created_at__date": date(2022, 4, 10), "count": 1}],
+        },
     }
     client = APIClient()
     response = client.get(reverse("articles_metrics"))
