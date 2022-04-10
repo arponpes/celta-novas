@@ -89,8 +89,6 @@ let renderChartArticlesByWeekDay = function (data) {
         }
         dataSets.push(dataSet);
     }
-    console.log(dataSets)
-
 
     new Chart(ctx, {
         type: 'line',
@@ -112,6 +110,6 @@ let renderChartArticlesByWeekDay = function (data) {
         },
     });
 }
-
-
-fetchData();
+window.addEventListener("load", function () {
+    fetchData();
+});
