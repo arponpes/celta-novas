@@ -4,7 +4,7 @@ import pytest
 
 from core.helpers.check_article_status import check_article_status
 from core.models import Article
-from core.tests.factories import ArticleFactory
+from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.mark.django_db

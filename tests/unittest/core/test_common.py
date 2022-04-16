@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 from core.crawlers.common import CrawlerBase
 import pytest
 
-from .factories import ArticleFactory
+from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.fixture
 def mock_response():
     mock = Mock()
     mock.status_code = 200
-    with open("core/tests/fixtures/faro_de_vigo.html", "r") as f:
+    with open("tests/unittest/core/fixtures/faro_de_vigo.html", "r") as f:
         mock.content = f.read()
     return mock
 

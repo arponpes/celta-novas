@@ -1,7 +1,7 @@
 from core.models import Article
 import pytest
 
-from .factories import ArticleFactory
+from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.mark.django_db

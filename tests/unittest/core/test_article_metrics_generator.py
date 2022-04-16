@@ -4,7 +4,7 @@ import pytest
 
 from core.helpers.article_metrics_generator import ArticleMetricsGenerator
 from core.models import Article
-from core.tests.factories import ArticleFactory
+from tests.unittest.core.factories import ArticleFactory
 
 
 class TestArticleMetricsGenerator:
