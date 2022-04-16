@@ -1,6 +1,5 @@
-import pytest
-
 from core.models import Article
+import pytest
 
 from .factories import ArticleFactory
 

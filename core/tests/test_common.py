@@ -1,9 +1,8 @@
 from unittest.mock import Mock
 
-import pytest
 from bs4 import BeautifulSoup
-
 from core.crawlers.common import CrawlerBase
+import pytest
 
 from .factories import ArticleFactory
 

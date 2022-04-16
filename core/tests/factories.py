@@ -1,7 +1,7 @@
+from core.models import Article
 import factory
 import factory.fuzzy
 
-from core.models import Article
 
 source_choices = [s[0] for s in Article.SOURCE_CHOICES]
 

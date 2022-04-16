@@ -1,9 +1,8 @@
 from unittest.mock import Mock
 
-import pytest
-
 from core.crawlers.marca_crawler import MarcaCrawler
 from core.models import Article
+import pytest
 
 
 @pytest.fixture
