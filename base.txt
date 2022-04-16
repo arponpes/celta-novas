@@ -14,14 +14,3 @@ psycopg2
 url-normalize
 drf-spectacular
 sentry-sdk
-
-# Testing
-tox
-pytest
-pytest-cov
-pytest-django
-pytest-sugar
-pytest-mock
-coverage
-flake8
-factory-boy

@@ -1,0 +1,10 @@
+-r ../base.txt
+tox
+pytest
+pytest-cov
+pytest-django
+pytest-sugar
+pytest-mock
+coverage
+flake8
+factory-boy

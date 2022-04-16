@@ -14,4 +14,4 @@ WORKDIR /celta_novas
 
 ADD . /celta_novas/
 
-RUN pip install -r requirements.txt
+RUN pip install -r base.txt
