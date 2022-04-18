@@ -1,7 +1,4 @@
-from datetime import date
 from datetime import timedelta
-from django.core.serializers.json import DjangoJSONEncoder
-import json
 
 from core import models
 from django.db.models import Count
@@ -24,8 +21,8 @@ class ArticleMetricsGenerator:
 
         articles_metrics["articles_by_source"] = self.get_articles_by_source()
 
-        from_date, to_date = self.last_week_date_range()
-        articles_metrics["articles_last_week_by_date"] = self.get_articles_by_date(from_date, to_date)
+        from_date = self.get_seven_days_ago_date()
+        articles_metrics["articles_last_week_by_date"] = self.get_articles_by_date(from_date)
         articles_metrics["articles_last_week_by_date_by_source"] = self.get_articles_by_date_by_source(from_date)
 
         return articles_metrics
@@ -59,29 +56,23 @@ class ArticleMetricsGenerator:
             articles_by_source[source[0]] = self.articles.filter(source=source[0]).count()
         return articles_by_source
 
-    def get_articles_by_date(self, start_date, end_date) -> dict:
+    def get_articles_by_date(self, start_date) -> dict:
+        return self.get_qs_by_date(created_at__gt=start_date)
+
+    def get_articles_by_date_by_source(self, start_date) -> dict:
+        articles_by_date_by_source = {}
+        for source in models.Article.SOURCE_CHOICES:
+            articles_by_date_by_source[source[0]] = self.get_qs_by_date(created_at__gt=start_date, source=source[0])
+        return articles_by_date_by_source
+
+    def get_qs_by_date(self, **kwargs) -> list:
         return list(
-            self.articles.filter(created_at__gt=start_date)
+            self.articles.filter(**kwargs)
             .values("created_at__date")
             .annotate(count=Count("id"))
             .values("created_at__date", "count")
             .order_by("created_at__date")
         )
 
-    def get_articles_by_date_by_source(self, start_date) -> dict:
-        articles_by_date_by_source = {}
-        for source in models.Article.SOURCE_CHOICES:
-            articles_by_date_by_source[source[0]] = list(
-                self.articles.filter(created_at__gt=start_date, source=source[0])
-                .values("created_at__date")
-                .annotate(count=Count("id"))
-                .values("created_at__date", "count")
-                .order_by("created_at__date")
-            )
-        return articles_by_date_by_source
-
-    def last_week_date_range(self) -> tuple:
-        today = date.today()
-        start_date = today - timedelta(days=7)
-        end_date = today
-        return start_date, end_date
+    def get_seven_days_ago_date(self) -> tuple:
+        return (timezone.now() - timedelta(days=7)).date()
