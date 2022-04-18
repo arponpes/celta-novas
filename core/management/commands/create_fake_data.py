@@ -1,9 +1,9 @@
-from django.core.management import BaseCommand
-from tests.unittest.core.factories import ArticleFactory
-from core.models import Article
-import random
 from datetime import date
 from datetime import timedelta
+import random
+
+from django.core.management import BaseCommand
+from tests.unittest.core.factories import ArticleFactory
 
 
 class Command(BaseCommand):
