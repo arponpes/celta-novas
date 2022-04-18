@@ -60,27 +60,23 @@ class ArticleMetricsGenerator:
         return articles_by_source
 
     def get_articles_by_date(self, start_date, end_date) -> dict:
-        qs = (
+        return list(
             self.articles.filter(created_at__gte=start_date)
             .values("created_at__date")
             .annotate(count=Count("id"))
             .values("created_at__date", "count")
             .order_by("created_at__date")
         )
-        return json.dumps(list(qs), cls=DjangoJSONEncoder)
 
     def get_articles_by_date_by_source(self, start_date) -> dict:
         articles_by_date_by_source = {}
         for source in models.Article.SOURCE_CHOICES:
-            articles_by_date_by_source[source[0]] = json.dumps(
-                list(
-                    self.articles.filter(created_at__gte=start_date, source=source[0])
-                    .values("created_at__date")
-                    .annotate(count=Count("id"))
-                    .values("created_at__date", "count")
-                    .order_by("created_at__date")
-                ),
-                cls=DjangoJSONEncoder,
+            articles_by_date_by_source[source[0]] = list(
+                self.articles.filter(created_at__gte=start_date, source=source[0])
+                .values("created_at__date")
+                .annotate(count=Count("id"))
+                .values("created_at__date", "count")
+                .order_by("created_at__date")
             )
         return articles_by_date_by_source
 

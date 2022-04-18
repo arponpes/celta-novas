@@ -94,12 +94,12 @@ def test_get_articles_metrics():
         "source_with_more_articles": {"source": "MARCA", "source__count": 3},
         "source_with_more_articles_last_24_hours": {"source": "MARCA", "source__count": 2},
         "articles_by_source": {"MARCA": 3, "MOI CELESTE": 0, "LA VOZ DE GALICIA": 0, "FARO DE VIGO": 1},
-        "articles_last_week_by_date": '[{"created_at__date": "2022-04-16", "count": 3}]',
+        "articles_last_week_by_date": [{"created_at__date": date(2022, 4, 18), "count": 3}],
         "articles_last_week_by_date_by_source": {
-            "MARCA": '[{"created_at__date": "2022-04-16", "count": 2}]',
-            "MOI CELESTE": "[]",
-            "LA VOZ DE GALICIA": "[]",
-            "FARO DE VIGO": '[{"created_at__date": "2022-04-16", "count": 1}]',
+            "MARCA": [{"created_at__date": date(2022, 4, 18), "count": 2}],
+            "MOI CELESTE": [],
+            "LA VOZ DE GALICIA": [],
+            "FARO DE VIGO": [{"created_at__date": date(2022, 4, 18), "count": 1}],
         },
     }
     client = APIClient()
