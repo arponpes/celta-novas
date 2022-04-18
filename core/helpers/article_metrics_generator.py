@@ -61,7 +61,7 @@ class ArticleMetricsGenerator:
 
     def get_articles_by_date(self, start_date, end_date) -> dict:
         return list(
-            self.articles.filter(created_at__gte=start_date)
+            self.articles.filter(created_at__gt=start_date)
             .values("created_at__date")
             .annotate(count=Count("id"))
             .values("created_at__date", "count")
@@ -72,7 +72,7 @@ class ArticleMetricsGenerator:
         articles_by_date_by_source = {}
         for source in models.Article.SOURCE_CHOICES:
             articles_by_date_by_source[source[0]] = list(
-                self.articles.filter(created_at__gte=start_date, source=source[0])
+                self.articles.filter(created_at__gt=start_date, source=source[0])
                 .values("created_at__date")
                 .annotate(count=Count("id"))
                 .values("created_at__date", "count")
