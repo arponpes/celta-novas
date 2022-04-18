@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from core import models
 from django.db.models import Count
+from django.db.models.functions import TruncMonth
 from django.utils import timezone
 
 
@@ -21,9 +22,16 @@ class ArticleMetricsGenerator:
 
         articles_metrics["articles_by_source"] = self.get_articles_by_source()
 
-        from_date = self.get_seven_days_ago_date()
-        articles_metrics["articles_last_week_by_date"] = self.get_articles_by_date(from_date)
-        articles_metrics["articles_last_week_by_date_by_source"] = self.get_articles_by_date_by_source(from_date)
+        date_one_week_ago = self.get_days_ago_date(7)
+        date_one_year_ago = self.get_days_ago_date(365)
+        articles_metrics["articles_last_week_by_date"] = self.get_articles_by_date(date_one_week_ago)
+        articles_metrics["articles_last_week_by_date_by_source"] = self.get_articles_by_date_by_source(
+            date_one_week_ago
+        )
+        articles_metrics["articles_last_year_by_date_by_source"] = self.get_articles_by_month_last_year(
+            date_one_year_ago
+        )
+        articles_metrics["article_creation_trend"] = self.get_article_creation_trend()
 
         return articles_metrics
 
@@ -74,5 +82,21 @@ class ArticleMetricsGenerator:
             .order_by("created_at__date")
         )
 
-    def get_seven_days_ago_date(self) -> tuple:
-        return (timezone.now() - timedelta(days=7)).date()
+    def get_articles_by_month_last_year(self, start_date):
+        return list(
+            self.articles.filter(created_at__gt=start_date)
+            .annotate(month=TruncMonth("created_at"))
+            .values("month")
+            .annotate(total=Count("id"))
+            .order_by("month")
+        )
+
+    def get_days_ago_date(self, days_ago) -> tuple:
+        return (timezone.now() - timedelta(days=days_ago)).date()
+
+    def get_article_creation_trend(self):
+        articles_previous_month = self.articles.filter(
+            created_at__gt=timezone.now() - timedelta(days=60), created_at__lt=timezone.now() - timedelta(days=30)
+        ).count()
+        articles_current_month = self.articles.filter(created_at__gt=timezone.now() - timedelta(days=30)).count()
+        return (articles_previous_month / articles_current_month) * 100

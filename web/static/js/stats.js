@@ -14,6 +14,9 @@ async function fetchData() {
         let data = await response.json();
         renderChartArticlesBySource(data);
         renderChartArticlesByWeekDay(data)
+        renderChartArticlesByMonthDay(data)
+        document.getElementById('total_articles').innerHTML = data['total_articles'] | "-";
+        document.getElementById('articles_trend').innerHTML = data['article_creation_trend'] | "-";
     }
 }
 
@@ -28,7 +31,7 @@ let renderChartArticlesBySource = function (data) {
     }
 
     new Chart(ctx, {
-        type: 'bar',
+        type: 'polarArea',
         data: {
             labels: labels,
             datasets: [{
@@ -40,22 +43,31 @@ let renderChartArticlesBySource = function (data) {
                     colors['FARO DE VIGO'],
                     colors['LA VOZ DE GALICIA'],
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                ],
-                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
             scales: {
-                y: {
-                    beginAtZero: true
+                r: {
+                    pointLabels: {
+                        display: true,
+                        centerPointLabels: true,
+                        font: {
+                            size: 18
+                        }
+                    }
                 }
             },
-        }
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Numero de artigos por fonte'
+                }
+            }
+        },
     });
 }
 
@@ -98,18 +110,59 @@ let renderChartArticlesByWeekDay = function (data) {
         },
         options: {
             responsive: true,
+            tension: 0.3,
             plugins: {
                 legend: {
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: 'Chart.js Line Chart'
+                    text: 'Numero de artigos por dia da semana'
                 }
             }
         },
     });
 }
+
+let renderChartArticlesByMonthDay = function (data) {
+    const ctx = document.getElementById("chart_articles_by_month_day").getContext("2d");
+    let labels = []
+    let dataValuesTotal = []
+
+    for (date of data['articles_last_year_by_date_by_source']) {
+        labels.push(moment(date['month']).format('MMMM, YYYY'));
+        dataValuesTotal.push(date['total']);
+    }
+    let dataSets = [{
+        label: 'Total',
+        data: dataValuesTotal,
+        borderColor: colors['TOTAL'],
+        borderWidth: 1
+    }]
+
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: dataSets
+        },
+        options: {
+            responsive: true,
+            tension: 0.3,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Numero de artigos por mes'
+                }
+            }
+        },
+    });
+}
+
 window.addEventListener("load", function () {
     fetchData();
 });
