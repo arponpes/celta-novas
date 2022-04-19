@@ -31,7 +31,7 @@ let renderChartArticlesBySource = function (data) {
     }
 
     new Chart(ctx, {
-        type: 'polarArea',
+        type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
