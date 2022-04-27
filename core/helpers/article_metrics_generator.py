@@ -89,7 +89,7 @@ class ArticleMetricsGenerator:
             .values("month")
             .annotate(total=Count("id"))
             .order_by("month")
-        )
+        )[:-1]
 
     def get_days_ago_date(self, days_ago) -> tuple:
         return (timezone.now() - timedelta(days=days_ago)).date()
@@ -99,4 +99,4 @@ class ArticleMetricsGenerator:
             created_at__gt=timezone.now() - timedelta(days=60), created_at__lt=timezone.now() - timedelta(days=30)
         ).count()
         articles_current_month = self.articles.filter(created_at__gt=timezone.now() - timedelta(days=30)).count()
-        return (articles_previous_month / articles_current_month) * 100
+        return (articles_current_month - articles_previous_month) / articles_previous_month * 100
