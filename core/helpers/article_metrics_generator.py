@@ -99,4 +99,6 @@ class ArticleMetricsGenerator:
             created_at__gt=timezone.now() - timedelta(days=60), created_at__lt=timezone.now() - timedelta(days=30)
         ).count()
         articles_current_month = self.articles.filter(created_at__gt=timezone.now() - timedelta(days=30)).count()
-        return (articles_current_month - articles_previous_month) / articles_previous_month * 100
+        if articles_current_month and articles_previous_month:
+            return (articles_current_month - articles_previous_month) / articles_previous_month * 100
+        return 0
