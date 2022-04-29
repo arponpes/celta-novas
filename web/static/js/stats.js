@@ -47,17 +47,6 @@ let renderChartArticlesBySource = function (data) {
         },
         options: {
             responsive: true,
-            scales: {
-                r: {
-                    pointLabels: {
-                        display: true,
-                        centerPointLabels: true,
-                        font: {
-                            size: 18
-                        }
-                    }
-                }
-            },
             plugins: {
                 legend: {
                     position: 'top',
