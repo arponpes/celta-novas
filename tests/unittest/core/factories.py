@@ -1,7 +1,7 @@
-from core.models import Article
 import factory
 import factory.fuzzy
 
+from core.models import Article
 
 source_choices = [s[0] for s in Article.SOURCE_CHOICES]
 
@@ -14,4 +14,4 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     url = factory.Sequence(lambda n: "Url %s" % n)
     image_url = factory.Sequence(lambda n: "Url %s" % n)
     source = factory.fuzzy.FuzzyChoice(choices=source_choices)
-    created_at = factory.Faker("date")
+    created_at = factory.Faker("past_datetime")

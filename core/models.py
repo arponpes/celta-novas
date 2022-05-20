@@ -18,7 +18,7 @@ class Article(models.Model):
     url = models.CharField(max_length=500)
     image_url = models.CharField(max_length=1000, null=True)
     source = models.CharField(max_length=30, choices=SOURCE_CHOICES)
-    created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
+    created_at = models.DateTimeField()
 
     def __str__(self):
         return f"{self.title} - {self.source}"

@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from core.models import Article
 from django.conf import settings
+from django.utils import timezone
 from url_normalize import url_normalize
 
 
@@ -27,10 +28,11 @@ class CrawlerBase:
             url = self.normalize_url(self.get_article_url(article))
             title = self.get_article_title(article)
             image_url = self.get_article_img(article) or settings.DEFAULT_IMAGE
+            created_at = timezone.now()
             if not self.to_be_created(title, url):
                 continue
 
-            Article(title=title, url=url, image_url=image_url, source=self.source).save()
+            Article(title=title, url=url, image_url=image_url, source=self.source, created_at=created_at).save()
 
     @staticmethod
     def normalize_url(url):
