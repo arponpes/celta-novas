@@ -8,3 +8,4 @@ pytest-mock
 coverage
 flake8
 factory-boy
+freezegun
