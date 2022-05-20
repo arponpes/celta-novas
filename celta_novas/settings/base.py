@@ -96,18 +96,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
@@ -174,11 +166,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {
-            "handlers": ["file_info", "file_error"],
-            "level": "INFO",
-            "propagate": True,
-        },
+        "django": {"handlers": ["file_info", "file_error"], "level": "INFO", "propagate": True},
         "celery": {"handlers": ["celery"], "level": "INFO", "propagate": True},
     },
 }
@@ -198,5 +186,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 DEFAULT_IMAGE = (
-    "https://cflvdg.avoz.es/sc/RBtphA7OHdc-Dpr4gmqXjiu9z7Y=/450x/2022/01/22/00121642860841634658426/Foto/V08E2011.jpg"
+    "https://cflvdg.avoz.es/sc/aji2NntqZ6jsrHBKXtGYEfS_0Yo="
+    "/450x/2022/05/17/00121652818922850590336/Foto/VY18P34F1_222050.jpg"
 )
