@@ -4,7 +4,7 @@ import pytest
 from django.utils import timezone
 from tests.unittest.core.factories import ArticleFactory
 
-from core.helpers.check_article_status import check_article_status
+from core.helpers.healtchecks import check_article_status
 from core.models import Article
 
 

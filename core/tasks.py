@@ -7,7 +7,7 @@ from core.crawlers.faro_de_vigo_crawler import FaroDeVigoCrawler
 from core.crawlers.la_voz_de_galicia_crawler import LaVozDeGaliciaCrawler
 from core.crawlers.marca_crawler import MarcaCrawler
 from core.crawlers.moi_celeste_crawler import MoiCelesteCrawler
-from core.helpers.check_article_status import check_article_status
+from core.helpers.healtchecks import check_article_status
 
 
 @shared_task
