@@ -6,4 +6,5 @@ from . import views
 urlpatterns = [
     path("", cache_page(15 * 30)(views.HomePageView.as_view()), name="home"),
     path("stats/", cache_page(15 * 30)(views.StatsPageView.as_view()), name="stats"),
+    path("heathcheck/", views.HealthCheckView.as_view(), name="healthcheck"),
 ]

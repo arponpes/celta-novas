@@ -1,7 +1,7 @@
-from django.views.generic import ListView, TemplateView
-
 from core.metrics.article_metrics_generator import ArticleMetricsGenerator
 from core.models import Article
+from django.http import JsonResponse
+from django.views.generic import ListView, TemplateView, View
 
 
 class HomePageView(ListView):
@@ -21,3 +21,8 @@ class HomePageView(ListView):
 
 class StatsPageView(TemplateView):
     template_name = "web/stats.html"
+
+
+class HealthCheckView(View):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse({"status": "OK"}, status=200)

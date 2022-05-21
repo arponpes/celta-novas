@@ -16,3 +16,10 @@ def test_get():
     assert response.status_code == 200
     assert set(response.context["article_list"]) == set(articles_expected)
     assert isinstance(response.context["page_obj"], Page)
+
+
+def test_heatlcheck():
+    client = APIClient()
+    response = client.get(reverse("healthcheck"))
+    assert response.status_code == 200
+    assert response.json() == {"status": "OK"}
