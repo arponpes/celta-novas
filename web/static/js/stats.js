@@ -126,17 +126,23 @@ let renderChartArticlesByMonthDay = function (data) {
         label: 'Total',
         data: dataValuesTotal,
         borderColor: colors['TOTAL'],
+        backgroundColor: colors['TOTAL'],
         borderWidth: 1
     }]
 
 
     new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: dataSets
         },
         options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
             responsive: true,
             tension: 0.3,
             plugins: {
