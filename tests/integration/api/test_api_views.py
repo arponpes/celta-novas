@@ -148,7 +148,7 @@ def test_post_article():
     assert response.json() == {"detail": 'Method "POST" not allowed.'}
 
 
-@pytest.xfail(reason="TODO - fix this test")
+@pytest.mark.xfail(reason="TODO - fix this test")
 @pytest.mark.django_db
 def test_get_articles_filtered():
     article_1 = ArticleFactory(source=Article.FARO_DE_VIGO)
@@ -169,7 +169,7 @@ def test_get_articles_filtered():
     assert response.json() == expected_response
 
 
-@pytest.xfail(reason="TODO - fix this test")
+@pytest.mark.xfail(reason="TODO - fix this test")
 @pytest.mark.django_db
 def test_get_articles_filtered_incorrect_source():
     ArticleFactory(source=Article.FARO_DE_VIGO)
