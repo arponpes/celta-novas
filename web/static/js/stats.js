@@ -1,9 +1,9 @@
 const colors = {
     'TOTAL': 'rgb(54, 162, 235)',
-    'MARCA': 'rgb(255, 107, 107)',
-    'MOI CELESTE': 'rgb(255, 217, 61)',
-    'FARO DE VIGO': 'rgb(107, 203, 119)',
-    'LA VOZ DE GALICIA': 'rgb(77, 150, 255)',
+    'MARCA': 'rgb(116, 0, 184)',
+    'MOI CELESTE': 'rgb(83, 144, 217)',
+    'FARO DE VIGO': 'rgb(100, 223, 223)',
+    'LA VOZ DE GALICIA': 'rgb(128, 255, 219)',
 }
 
 
@@ -126,7 +126,6 @@ let renderChartArticlesByMonthDay = function (data) {
         label: 'Total',
         data: dataValuesTotal,
         borderColor: colors['TOTAL'],
-        backgroundColor: colors['TOTAL'],
         borderWidth: 1
     }]
 
