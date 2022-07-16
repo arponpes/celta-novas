@@ -25,16 +25,24 @@
 <div class="flex justify-center">
   <nav aria-label="Page navigation example">
     <ul class="flex list-style-none">
+
       <li class="page-item"><a
-          class="{% if not page_obj.has_previous %}cursor-not-allowed{% endif %} m-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
+          class="{% if not page_obj.has_previous %}cursor-not-allowed{% endif %} mx-1 my-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
+          {% if page_obj.has_previous %}href="?page=1" {% endif %}>Primeira</a></li>
+
+      <li class="page-item"><a
+          class="{% if not page_obj.has_previous %}cursor-not-allowed{% endif %} mx-1 my-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
           {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}" {% endif %}>Anterior</a></li>
       <li class="page-item">
-        <span class="m-6 text-sky-400 py-1.5 relative block">Páxina {{ page_obj.number }}
-          de {{ page_obj.paginator.num_pages }}</span>
+        <span class="mx-1 my-6 text-sky-400 py-1.5 relative block">{{ page_obj.number }}
+          - {{ page_obj.paginator.num_pages }}</span>
       </li>
       <li class="page-item"><a
-          class="{% if not page_obj.has_next %}cursor-not-allowed{% endif %} m-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
+          class="{% if not page_obj.has_next %}cursor-not-allowed{% endif %} mx-1 my-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
           {% if page_obj.has_next %} href="?page={{ page_obj.next_page_number }}" {% endif %}>Seguinte</a></li>
+      <li class="page-item"><a
+          class="{% if not page_obj.has_next %}cursor-not-allowed{% endif %} mx-1 my-6 page-link bg-gray-200 relative block py-1.5 px-3 rounded border-0 outline-none transition-all duration-300 rounded hover:bg-gray-400 focus:shadow-none"
+          {% if page_obj.has_next %} href="?page={{ page_obj.paginator.num_pages }}" {% endif %}>Última</a></li>
     </ul>
   </nav>
 </div>
