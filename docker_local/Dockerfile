@@ -13,4 +13,4 @@ WORKDIR /celta_novas
 
 ADD . /celta_novas/
 
-RUN pip install -r /tests/requirements.txt
+RUN pip install -r tests/requirements.txt
