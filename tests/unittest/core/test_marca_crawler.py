@@ -10,42 +10,41 @@ class TestMarcaCrawler(CommonTest):
 
     @pytest.mark.django_db
     def test_get_article_url(self, mock_response):
-        expected_url = "https://www.marca.com/futbol/celta/2021/12/25/61c7599ce2704e57938b45eb.html"
+        expected_url = "https://www.marca.com/futbol/primera-division/2022/06/24/62b58ab4e2704ec4958b45ab.html"
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_url(articles[0]) == expected_url
 
     @pytest.mark.django_db
     def test_get_article_title(self, mock_response):
-        expected_title = "El Celta, con la vista en el mercado invernal"
+        expected_title = "Calendario de partidos de pretemporada de los equipos de Primera división"
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_title(articles[0]).strip() == expected_title
 
     @pytest.mark.django_db
     def test_get_articles(self, mock_response):
         articles = self.crawler.get_articles()
-        assert len(articles) == 42
+        assert len(articles) == 50
 
     @pytest.mark.django_db
     def test_update_articles(self, mock_response):
         articles = set(self.crawler.get_articles())
         assert Article.objects.count() == 0
         self.crawler.update_articles(articles)
-        assert Article.objects.count() == 42
+        assert Article.objects.count() == 50
 
     @pytest.mark.django_db
     def test_update_articles_avoid_duplicates(self, mock_response):
         articles = self.crawler.get_articles()
         assert Article.objects.count() == 0
         self.crawler.update_articles(articles)
-        assert Article.objects.count() == 42
+        assert Article.objects.count() == 50
         self.crawler.update_articles(articles)
-        assert Article.objects.count() == 42
+        assert Article.objects.count() == 50
 
     @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip()
-            == "https://phantom-marca.unidadeditorial.es/72c9e239d4d72b736142a8f89848ab95/f/webp/"
-            "assets/multimedia/imagenes/2021/12/25/16404543713280_310x174.jpg"
+            == "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2022/06/24/16560701441413.jpg"
         )
