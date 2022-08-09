@@ -35,7 +35,7 @@ class CrawlerBase:
                 continue
 
             Article(title=title, url=url, image_url=image_url, source=self.source, created_at=created_at).save()
-            self.twitter_module.create_tweet(article)
+            self.twitter_module.create_tweet(title, url)
 
     @staticmethod
     def normalize_url(url):

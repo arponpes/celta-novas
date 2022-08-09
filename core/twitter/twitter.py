@@ -11,9 +11,9 @@ class TwitterModule:
             access_token_secret=settings.ACCESS_TOKEN_SECRET,
         )
 
-    def create_tweet(self, article):
+    def create_tweet(self, title, url):
         article_text = f"""
-        {article.title}
-        {article.url}
+        {title}
+        {url}
         """
-        self.client.create_tweet(article_text)
+        self.client.create_tweet(text=article_text)
