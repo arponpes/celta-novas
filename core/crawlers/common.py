@@ -4,9 +4,11 @@ from core.models import Article
 from django.conf import settings
 from django.utils import timezone
 from url_normalize import url_normalize
+from core.twitter import TwitterModule
 
 
 class CrawlerBase:
+    twitter_module = TwitterModule()
     source = None
     url_base = None
     url = None
@@ -33,6 +35,7 @@ class CrawlerBase:
                 continue
 
             Article(title=title, url=url, image_url=image_url, source=self.source, created_at=created_at).save()
+            self.twitter_module.create_tweet(article)
 
     @staticmethod
     def normalize_url(url):
