@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from core.models import Article
+from core.twitter.twitter import TwitterModule
 from django.conf import settings
 from django.utils import timezone
 from url_normalize import url_normalize
-from core.twitter import TwitterModule
 
 
 class CrawlerBase:
