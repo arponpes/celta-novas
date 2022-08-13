@@ -1,14 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from core.models import Article
-from core.twitter.twitter import TwitterModule
 from django.conf import settings
 from django.utils import timezone
 from url_normalize import url_normalize
 
+from core.models import Article
+
 
 class CrawlerBase:
-    twitter_module = TwitterModule()
     source = None
     url_base = None
     url = None
@@ -25,37 +24,30 @@ class CrawlerBase:
     def get_article_img(self, article):
         pass
 
-    def update_articles(self, articles):
-        for article in articles:
-            url = self.normalize_url(self.get_article_url(article))
-            title = self.get_article_title(article)
-            image_url = self.get_article_img(article) or settings.DEFAULT_IMAGE
-            created_at = timezone.now()
-            if not self.to_be_created(title, url):
-                continue
-
-            Article(title=title, url=url, image_url=image_url, source=self.source, created_at=created_at).save()
-            self.twitter_module.create_tweet(title, url)
-
-    @staticmethod
-    def normalize_url(url):
-        return url_normalize(url)
-
-    def execute_crawler(self):
-        articles = self.get_articles()
-        self.update_articles(articles)
-
-    def to_be_created(self, title, url):
-        if Article.objects.filter(title=title).exists() or Article.objects.filter(url=url).exists():
-            return False
-        return True
-
     def get_soup(self, url):
         page_content = self.make_requests(url)
         return BeautifulSoup(page_content, "html.parser")
+
+    def normalize_url(self, url):
+        return url_normalize(url)
 
     def make_requests(self, url):
         response = requests.get(url)
         if response.status_code == 200:
             return response.content
         return ""
+
+    def execute_crawler(self):
+        articles_from_source = self.get_articles()
+        articles = []
+        for article in articles_from_source:
+            articles.append(
+                Article(
+                    title=self.get_article_title(article),
+                    url=self.normalize_url(self.get_article_url(article)),
+                    image_url=self.get_article_img(article) or settings.DEFAULT_IMAGE,
+                    source=self.source,
+                    created_at=timezone.now(),
+                )
+            )
+        return articles

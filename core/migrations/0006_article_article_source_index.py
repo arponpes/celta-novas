@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0005_alter_article_image_url_alter_article_url'),
+        ("core", "0005_alter_article_image_url_alter_article_url"),
     ]
 
     operations = [
         migrations.AddIndex(
-            model_name='article',
-            index=models.Index(fields=['title', '-created_at'], name='article_source_index'),
+            model_name="article",
+            index=models.Index(fields=["title", "-created_at"], name="article_source_index"),
         ),
     ]

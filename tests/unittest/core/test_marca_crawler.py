@@ -1,7 +1,8 @@
+import pytest
+
 from core.crawlers.marca_crawler import MarcaCrawler
 from core.models import Article
 from tests.unittest.conftest import CommonTest
-import pytest
 
 
 class TestMarcaCrawler(CommonTest):
@@ -26,25 +27,18 @@ class TestMarcaCrawler(CommonTest):
         assert len(articles) == 50
 
     @pytest.mark.django_db
-    def test_update_articles(self, mock_response):
-        articles = set(self.crawler.get_articles())
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 50
-
-    @pytest.mark.django_db
-    def test_update_articles_avoid_duplicates(self, mock_response):
-        articles = self.crawler.get_articles()
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 50
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 50
-
-    @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip()
             == "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2022/06/24/16560701441413.jpg"
         )
+
+    @pytest.mark.django_db
+    def test_execute_crawler(self, mock_response):
+        articles = self.crawler.execute_crawler()
+        assert len(articles) == 50
+        for article in articles:
+            assert article.source == Article.MARCA
+            assert article.url
+            assert article.title

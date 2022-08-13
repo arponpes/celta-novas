@@ -1,8 +1,9 @@
 import pytest
-from core.models import Article
 from django.core.paginator import Page
 from django.urls.base import reverse
 from rest_framework.test import APIClient
+
+from core.models import Article
 from tests.unittest.core.factories import ArticleFactory
 
 

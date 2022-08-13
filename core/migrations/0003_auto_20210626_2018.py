@@ -6,21 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_auto_20210404_1726'),
+        ("core", "0002_auto_20210404_1726"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_created=True, auto_now_add=True)),
-                ('title', models.CharField(max_length=200)),
-                ('url', models.CharField(max_length=300)),
-                ('source', models.CharField(choices=[('MARCA', 'Marca'), ('MOI CELESTE', 'Moi celeste'), ('LA VOZ DE GALICIA', 'La voz de Galicia'), ('FARO DE VIGO', 'Faro de Vigo')], max_length=30)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("created_at", models.DateTimeField(auto_created=True, auto_now_add=True)),
+                ("title", models.CharField(max_length=200)),
+                ("url", models.CharField(max_length=300)),
+                (
+                    "source",
+                    models.CharField(
+                        choices=[
+                            ("MARCA", "Marca"),
+                            ("MOI CELESTE", "Moi celeste"),
+                            ("LA VOZ DE GALICIA", "La voz de Galicia"),
+                            ("FARO DE VIGO", "Faro de Vigo"),
+                        ],
+                        max_length=30,
+                    ),
+                ),
             ],
         ),
         migrations.DeleteModel(
-            name='New',
+            name="New",
         ),
     ]

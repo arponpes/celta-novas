@@ -1,9 +1,10 @@
 from datetime import timedelta
 
-from core import models
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
+
+from core import models
 
 
 class ArticleMetricsGenerator:

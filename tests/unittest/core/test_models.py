@@ -1,6 +1,6 @@
-from core.models import Article
 import pytest
 
+from core.models import Article
 from tests.unittest.core.factories import ArticleFactory
 
 

@@ -1,12 +1,12 @@
 from .base import *
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'testing',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "testing",
     }
 }
 
-LOGS_PATH = ''
+LOGS_PATH = ""
 
-LOGGING = ''
+LOGGING = ""

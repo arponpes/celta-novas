@@ -1,5 +1,6 @@
-from core.models import Article
 from rest_framework import serializers
+
+from core.models import Article
 
 
 class ArticleSerializer(serializers.ModelSerializer):

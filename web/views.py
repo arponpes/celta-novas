@@ -1,7 +1,8 @@
-from core.metrics.article_metrics_generator import ArticleMetricsGenerator
-from core.models import Article
 from django.http import JsonResponse
 from django.views.generic import ListView, TemplateView, View
+
+from core.metrics.article_metrics_generator import ArticleMetricsGenerator
+from core.models import Article
 
 
 class HomePageView(ListView):

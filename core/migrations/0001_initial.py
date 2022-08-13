@@ -7,18 +7,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='New',
+            name="New",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_created=True, auto_now_add=True)),
-                ('title', models.CharField(max_length=30)),
-                ('url', models.CharField(max_length=300)),
-                ('source', models.CharField(choices=[('MR', 'MARCA'), ('MC', 'MOI CELESTE'), ('JR', 'LA VOZ DE GALICIA'), ('SR', 'FARO DE VIGO')], max_length=2)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("created_at", models.DateTimeField(auto_created=True, auto_now_add=True)),
+                ("title", models.CharField(max_length=30)),
+                ("url", models.CharField(max_length=300)),
+                (
+                    "source",
+                    models.CharField(
+                        choices=[
+                            ("MR", "MARCA"),
+                            ("MC", "MOI CELESTE"),
+                            ("JR", "LA VOZ DE GALICIA"),
+                            ("SR", "FARO DE VIGO"),
+                        ],
+                        max_length=2,
+                    ),
+                ),
             ],
         ),
     ]

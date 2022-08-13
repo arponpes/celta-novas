@@ -1,7 +1,8 @@
+import pytest
+
 from core.crawlers.la_voz_de_galicia_crawler import LaVozDeGaliciaCrawler
 from core.models import Article
 from tests.unittest.conftest import CommonTest
-import pytest
 
 
 class TestLaVozDeGaliciaCrawler(CommonTest):
@@ -29,22 +30,6 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
         assert len(articles) == 50
 
     @pytest.mark.django_db
-    def test_update_articles(self, mock_response):
-        articles = set(self.crawler.get_articles())
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 48
-
-    @pytest.mark.django_db
-    def test_update_articles_avoid_duplicates(self, mock_response):
-        articles = self.crawler.get_articles()
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 48
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 48
-
-    @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
@@ -52,3 +37,12 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
             == "https://cflvdg.avoz.es/sc/ZYbdY4WqJmCau-YBzXVRgZUigak=/450x/2021/12/24/"
             "00121640366288246778661/Foto/54353454543534.JPG"
         )
+
+    @pytest.mark.django_db
+    def test_execute_crawler(self, mock_response):
+        articles = self.crawler.execute_crawler()
+        assert len(articles) == 50
+        for article in articles:
+            assert article.source == Article.LA_VOZ_DE_GALICIA
+            assert article.url
+            assert article.title

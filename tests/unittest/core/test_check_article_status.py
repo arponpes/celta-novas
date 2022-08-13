@@ -2,10 +2,10 @@ from datetime import timedelta
 
 import pytest
 from django.utils import timezone
-from tests.unittest.core.factories import ArticleFactory
 
 from core.helpers.healthcheck import check_article_status
 from core.models import Article
+from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.mark.django_db

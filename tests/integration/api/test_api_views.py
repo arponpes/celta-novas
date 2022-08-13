@@ -3,10 +3,11 @@ import json
 import zoneinfo
 
 import pytest
-from core.models import Article
 from django.urls.base import reverse
 from freezegun import freeze_time
 from rest_framework.test import APIClient
+
+from core.models import Article
 from tests.unittest.core.factories import ArticleFactory
 
 

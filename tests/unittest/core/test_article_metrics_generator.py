@@ -2,10 +2,10 @@ from datetime import date
 
 import pytest
 from django.utils import timezone
-from tests.unittest.core.factories import ArticleFactory
 
 from core.metrics.article_metrics_generator import ArticleMetricsGenerator
 from core.models import Article
+from tests.unittest.core.factories import ArticleFactory
 
 
 class TestArticleMetricsGenerator:

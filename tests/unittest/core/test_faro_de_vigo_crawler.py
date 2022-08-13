@@ -1,7 +1,8 @@
+import pytest
+
 from core.crawlers.faro_de_vigo_crawler import FaroDeVigoCrawler
 from core.models import Article
 from tests.unittest.conftest import CommonTest
-import pytest
 
 
 class TestFaroDeVigoCrawler(CommonTest):
@@ -28,25 +29,18 @@ class TestFaroDeVigoCrawler(CommonTest):
         assert len(articles) == 17
 
     @pytest.mark.django_db
-    def test_update_articles(self, mock_response):
-        articles = set(self.crawler.get_articles())
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 17
-
-    @pytest.mark.django_db
-    def test_update_articles_avoid_duplicates(self, mock_response):
-        articles = self.crawler.get_articles()
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 17
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 17
-
-    @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip() == "https://estaticos-cdn.prensaiberica.es/clip/"
             "eee3962b-a83e-4d3f-8da3-5c838d59f61c_21-9-aspect-ratio_default_0_x2278y1104.jpg"
         )
+
+    @pytest.mark.django_db
+    def test_execute_crawler(self, mock_response):
+        articles = self.crawler.execute_crawler()
+        assert len(articles) == 17
+        for article in articles:
+            assert article.source == Article.FARO_DE_VIGO
+            assert article.url
+            assert article.title

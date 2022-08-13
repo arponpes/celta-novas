@@ -1,7 +1,8 @@
+import pytest
+
 from core.crawlers.moi_celeste_crawler import MoiCelesteCrawler
 from core.models import Article
 from tests.unittest.conftest import CommonTest
-import pytest
 
 
 class TestMoiCelesteCrawler(CommonTest):
@@ -26,22 +27,6 @@ class TestMoiCelesteCrawler(CommonTest):
         assert len(articles) == 25
 
     @pytest.mark.django_db
-    def test_update_articles(self, mock_response):
-        articles = set(self.crawler.get_articles())
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 25
-
-    @pytest.mark.django_db
-    def test_update_articles_avoid_duplicates(self, mock_response):
-        articles = self.crawler.get_articles()
-        assert Article.objects.count() == 0
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 25
-        self.crawler.update_articles(articles)
-        assert Article.objects.count() == 25
-
-    @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
@@ -50,3 +35,12 @@ class TestMoiCelesteCrawler(CommonTest):
             "WxAbL6lq9IaEhyLn_tQ8wQGlRngccj0mdXMvEtDCpujfsRNCyqUOuuUsHPhmfN2s4krY14O0rNXd7W5X_RSHXFm98D5HO"
             "cYgL-U9rMZDoE74gmn_WRYqqYHgqC3mVeI_FfVOj9Pl6A=w640-h442"
         )
+
+    @pytest.mark.django_db
+    def test_execute_crawler(self, mock_response):
+        articles = self.crawler.execute_crawler()
+        assert len(articles) == 25
+        for article in articles:
+            assert article.source == Article.MOI_CELESTE
+            assert article.url
+            assert article.title

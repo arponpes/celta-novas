@@ -1,9 +1,10 @@
 import django_filters
-from core.metrics.article_metrics_generator import ArticleMetricsGenerator
-from core.models import Article
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from core.metrics.article_metrics_generator import ArticleMetricsGenerator
+from core.models import Article
 
 from .filters import ArticleFilter
 from .serializers import ArticleSerializer

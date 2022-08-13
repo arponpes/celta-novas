@@ -1,7 +1,8 @@
 from datetime import timedelta
 
-from core.models import Article
 from django.utils import timezone
+
+from core.models import Article
 
 
 def check_article_status():

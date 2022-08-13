@@ -1,5 +1,5 @@
-from rest_framework.test import APIClient
 from django.urls.base import reverse
+from rest_framework.test import APIClient
 
 
 def test_swagger_documentation():
