@@ -4,7 +4,6 @@ import pytest
 from bs4 import BeautifulSoup
 
 from core.crawlers.common import CrawlerBase
-from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.fixture
