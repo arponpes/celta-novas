@@ -4,7 +4,6 @@ import pytest
 from bs4 import BeautifulSoup
 
 from core.crawlers.common import CrawlerBase
-from tests.unittest.core.factories import ArticleFactory
 
 
 @pytest.fixture
@@ -42,3 +41,12 @@ class TestCrawlerBase:
     def test_make_request_error(self, mocker, mock_response_error):
         mocker.patch("requests.get", return_value=mock_response_error)
         assert CrawlerBase.make_requests(CrawlerBase(), "foo") == ""
+
+    def test_check_article_extracted_correctly(self):
+        assert CrawlerBase.check_article_extracted_correctly(CrawlerBase(), title="foo", url="foo")
+
+    def test_check_article_extracted_correctly_false(self):
+        article = Mock()
+        article.url = ""
+        article.title = "foo"
+        assert not CrawlerBase.check_article_extracted_correctly(CrawlerBase(), title="foo", url="")

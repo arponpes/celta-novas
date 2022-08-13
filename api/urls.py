@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.decorators.cache import cache_page
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
+                                   SpectacularSwaggerView)
 
 from .views import ArticleListView, ArticlesMetricsView
 
