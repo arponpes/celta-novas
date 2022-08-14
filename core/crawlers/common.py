@@ -37,14 +37,21 @@ class CrawlerBase:
             return response.content
         return ""
 
+    def check_article_extracted_correctly(self, title, url):
+        return all([title, url])
+
     def execute_crawler(self):
         articles_from_source = self.get_articles()
         articles = []
         for article in articles_from_source:
+            title = self.get_article_title(article)
+            url = self.normalize_url(self.get_article_url(article))
+            if not self.check_article_extracted_correctly(title, url):
+                continue
             articles.append(
                 Article(
-                    title=self.get_article_title(article),
-                    url=self.normalize_url(self.get_article_url(article)),
+                    title=title,
+                    url=url,
                     image_url=self.get_article_img(article) or settings.DEFAULT_IMAGE,
                     source=self.source,
                     created_at=timezone.now(),

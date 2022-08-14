@@ -1,3 +1,4 @@
+import re
 import urllib.parse
 
 from core.models import Article
@@ -11,7 +12,10 @@ class LaVozDeGaliciaCrawler(CrawlerBase):
     url = urllib.parse.urljoin(url_base, "gradario/")
 
     def get_article_url(self, article) -> str:
-        return f'{self.url_base}{article.find("h2").find("a")["href"]}'
+        url = f'{self.url_base}{article.find("h2").find("a")["href"]}'
+        if re.findall(r"video/gradario", url):
+            return ""
+        return url
 
     def get_article_title(self, article) -> str:
         return article.find("h2").find("a").text.strip()

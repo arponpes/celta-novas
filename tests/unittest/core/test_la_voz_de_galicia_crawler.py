@@ -41,7 +41,7 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
     @pytest.mark.django_db
     def test_execute_crawler(self, mock_response):
         articles = self.crawler.execute_crawler()
-        assert len(articles) == 50
+        assert len(articles) == 42
         for article in articles:
             assert article.source == Article.LA_VOZ_DE_GALICIA
             assert article.url
