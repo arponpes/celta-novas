@@ -117,14 +117,14 @@ def test_get_articles():
             "url": article_1.url,
             "source": article_1.source,
             "image_url": article_1.image_url,
-            "created_at": article_1.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "created_at": article_1.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
         },
         {
             "title": article_2.title,
             "url": article_2.url,
             "source": article_2.source,
             "image_url": article_2.image_url,
-            "created_at": article_2.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "created_at": article_2.created_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
         },
     ]
     expected_response = {"count": 2, "next": None, "previous": None, "results": expected_results}

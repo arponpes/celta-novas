@@ -19,6 +19,12 @@ def test_get():
     assert isinstance(response.context["page_obj"], Page)
 
 
+def test_get_stats():
+    client = APIClient()
+    response = client.get(reverse("stats"))
+    assert response.status_code == 200
+
+
 def test_healthcheck():
     client = APIClient()
     response = client.get(reverse("healthcheck"))
