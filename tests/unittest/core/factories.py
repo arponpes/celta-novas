@@ -1,5 +1,6 @@
 import factory
 import factory.fuzzy
+from django.utils import timezone
 
 from core.models import Article
 
@@ -14,4 +15,4 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     url = factory.Sequence(lambda n: "Url %s" % n)
     image_url = factory.Sequence(lambda n: "Url %s" % n)
     source = factory.fuzzy.FuzzyChoice(choices=source_choices)
-    created_at = factory.Faker("past_datetime")
+    created_at = timezone.now()

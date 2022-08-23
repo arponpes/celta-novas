@@ -1,6 +1,7 @@
-from datetime import date
+from datetime import datetime
 
 import pytest
+from dateutil import tz
 from django.utils import timezone
 
 from core.metrics.article_metrics_generator import ArticleMetricsGenerator
@@ -27,7 +28,7 @@ class TestArticleMetricsGenerator:
     def test_get_articles_last_24_hours(self):
         ArticleFactory(created_at=timezone.now())
         ArticleFactory(created_at=timezone.now())
-        ArticleFactory(created_at=date(2020, 1, 1))
+        ArticleFactory(created_at=datetime(2020, 1, 1, tzinfo=tz.tzutc()))
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
         assert article_generator.get_articles_last_24_hours() == 2
@@ -58,7 +59,7 @@ class TestArticleMetricsGenerator:
         ArticleFactory(source=Article.MARCA, created_at=timezone.now())
         ArticleFactory(source=Article.MARCA, created_at=timezone.now())
         ArticleFactory(source=Article.FARO_DE_VIGO, created_at=timezone.now())
-        ArticleFactory(source=Article.MARCA, created_at=date(2020, 1, 1))
+        ArticleFactory(created_at=datetime(2020, 1, 1, tzinfo=tz.tzutc()))
         articles = Article.objects.all()
         article_generator = ArticleMetricsGenerator(articles)
         assert article_generator.get_source_with_more_articles_last_24_hours() == {
