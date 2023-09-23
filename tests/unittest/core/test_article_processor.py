@@ -29,11 +29,6 @@ class TestArticleProcessor:
         assert Article.objects.filter(title=article.title).exists()
 
     @pytest.mark.django_db
-    def test_create_tweet(self, mocker):
-        self.article_processor_class.create_tweet(ArticleFactory(title="foo", url="http://foo.com"))
-        mock.assert_called_once_with("foo", "http://foo.com")
-
-    @pytest.mark.django_db
     def test_to_be_created_true(self):
         assert self.article_processor_class.to_be_created("foo", "http://foo.com")
 

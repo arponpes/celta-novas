@@ -12,36 +12,36 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
     @pytest.mark.django_db
     def test_get_article_url(self, mock_response):
         expected_url = (
-            "https://www.lavozdegalicia.es//noticia/gradario/2021/12/24/"
-            "felicitaciones-celtistas/00031640337006491729817.htm"
+            "https://www.lavozdegalicia.es//noticia/gradario/2023/09/23/"
+            "celta-echa-borda-siete-minutos-3-2/00031695494384727759350.htm"
         )
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_url(articles[0]) == expected_url
 
     @pytest.mark.django_db
     def test_get_article_title(self, mock_response):
-        expected_title = "Así felicitan la Navidad jugadores y afición del Celta"
+        expected_title = "El Celta echa todo por la borda en siete minutos (3-2)"
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_title(articles[0]) == expected_title
 
     @pytest.mark.django_db
     def test_get_articles(self, mock_response):
         articles = self.crawler.get_articles()
-        assert len(articles) == 50
+        assert len(articles) == 53
 
     @pytest.mark.django_db
     def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip()
-            == "https://cflvdg.avoz.es/sc/ZYbdY4WqJmCau-YBzXVRgZUigak=/450x/2021/12/24/"
-            "00121640366288246778661/Foto/54353454543534.JPG"
+            == "https://cflvdg.avoz.es/sc/b2u0IF8evhTwQVSWWpsFcfhbQ9M=/768x/2023/09/23"
+            "/00121695494221437515672/Foto/reu_20230923_182936612.jpg"
         )
 
     @pytest.mark.django_db
     def test_execute_crawler(self, mock_response):
         articles = self.crawler.execute_crawler()
-        assert len(articles) == 42
+        assert len(articles) == 49
         for article in articles:
             assert article.source == Article.LA_VOZ_DE_GALICIA
             assert article.url
