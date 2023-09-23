@@ -11,7 +11,6 @@ class TestArticleProcessor:
 
     @pytest.mark.django_db
     def test_update_articles(self, mocker):
-        mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
         article_duplicated = ArticleFactory()
         self.article_processor_class.save_article(article_duplicated)
         articles = [
@@ -31,7 +30,6 @@ class TestArticleProcessor:
 
     @pytest.mark.django_db
     def test_create_tweet(self, mocker):
-        mock = mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
         self.article_processor_class.create_tweet(ArticleFactory(title="foo", url="http://foo.com"))
         mock.assert_called_once_with("foo", "http://foo.com")
 

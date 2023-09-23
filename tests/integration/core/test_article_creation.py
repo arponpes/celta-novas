@@ -10,7 +10,6 @@ from core.models import Article
 
 @pytest.mark.django_db
 def test_execute_moi_celeste_crawler(mocker):
-    mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
     ap = ArticleProcessor(MoiCelesteCrawler)
     ap.process_articles()
     assert Article.objects.filter(source=Article.MOI_CELESTE).exists()
@@ -18,7 +17,6 @@ def test_execute_moi_celeste_crawler(mocker):
 
 @pytest.mark.django_db
 def test_execute_fv_crawler(mocker):
-    mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
     ap = ArticleProcessor(FaroDeVigoCrawler)
     ap.process_articles()
     assert Article.objects.filter(source=Article.FARO_DE_VIGO).exists()
@@ -26,7 +24,6 @@ def test_execute_fv_crawler(mocker):
 
 @pytest.mark.django_db
 def test_execute_marca_crawler(mocker):
-    mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
     ap = ArticleProcessor(MarcaCrawler)
     ap.process_articles()
     assert Article.objects.filter(source=Article.MARCA).exists()
@@ -34,7 +31,6 @@ def test_execute_marca_crawler(mocker):
 
 @pytest.mark.django_db
 def test_execute_lv_crawler(mocker):
-    mocker.patch("core.twitter.twitter.TwitterModule.create_tweet")
     ap = ArticleProcessor(LaVozDeGaliciaCrawler)
     ap.process_articles()
     assert Article.objects.filter(source=Article.LA_VOZ_DE_GALICIA).exists()
