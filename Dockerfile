@@ -15,3 +15,11 @@ WORKDIR /celta_novas
 ADD . /celta_novas/
 
 RUN pip install -r base.txt
+
+
+# Define the entry point script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entry point to execute necessary commands
+ENTRYPOINT ["/entrypoint.sh"]
