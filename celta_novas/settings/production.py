@@ -16,5 +16,3 @@ ALLOWED_HOSTS = [
 #         "KEY_PREFIX": "example",
 #     }
 # }
-
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
