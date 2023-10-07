@@ -121,8 +121,8 @@ USE_TZ = True
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = "staticfiles"
 
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_BROKER_URL = os.environ.get("CELERY_HOST", "redis://redis:6379")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_HOST", "redis://redis:6379")
 CELERY_TIMEZONE = "UTC"
 CELERY_ENABLE_UTC = True
 
