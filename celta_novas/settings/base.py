@@ -118,6 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_URL = "/staticfiles/"
 STATIC_ROOT = "staticfiles"
 
 CELERY_BROKER_URL = os.environ.get("CELERY_HOST", "redis://redis:6379")
