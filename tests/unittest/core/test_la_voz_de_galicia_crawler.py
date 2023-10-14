@@ -10,7 +10,7 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
     fixture = "tests/unittest/core/fixtures/la_voz_de_galicia.html"
 
     @pytest.mark.django_db
-    def test_get_article_url(self):
+    def test_get_article_url(self, mock_response):
         expected_url = (
             "https://www.lavozdegalicia.es//noticia/gradario/2023/09/23/"
             "celta-echa-borda-siete-minutos-3-2/00031695494384727759350.htm"
@@ -19,18 +19,18 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
         assert self.crawler.get_article_url(articles[0]) == expected_url
 
     @pytest.mark.django_db
-    def test_get_article_title(self):
+    def test_get_article_title(self, mock_response):
         expected_title = "El Celta echa todo por la borda en siete minutos (3-2)"
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_title(articles[0]) == expected_title
 
     @pytest.mark.django_db
-    def test_get_articles(self):
+    def test_get_articles(self, mock_response):
         articles = self.crawler.get_articles()
         assert len(articles) == 53
 
     @pytest.mark.django_db
-    def test_get_article_image(self):
+    def test_get_article_image(self, mock_response):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip()
@@ -39,7 +39,7 @@ class TestLaVozDeGaliciaCrawler(CommonTest):
         )
 
     @pytest.mark.django_db
-    def test_execute_crawler(self):
+    def test_execute_crawler(self, mock_response):
         articles = self.crawler.execute_crawler()
         assert len(articles) == 49
         for article in articles:
