@@ -10,7 +10,7 @@ class TestFaroDeVigoCrawler(CommonTest):
     fixture = "tests/unittest/core/fixtures/faro_de_vigo.html"
 
     @pytest.mark.django_db
-    def test_get_article_url(self, mock_response):
+    def test_get_article_url(self):
         expected_url = (
             "https://galego.farodevigo.es//celta-de-vigo/2022/01/19/celta-logra-triunfo-madurez-frente-61747882.html"
         )
@@ -18,18 +18,18 @@ class TestFaroDeVigoCrawler(CommonTest):
         assert self.crawler.get_article_url(articles[0]) == expected_url
 
     @pytest.mark.django_db
-    def test_get_article_title(self, mock_response):
+    def test_get_article_title(self):
         expected_title = "El Celta firma un triunfo de madurez"
         articles = self.crawler.get_articles()
         assert self.crawler.get_article_title(articles[0]) == expected_title
 
     @pytest.mark.django_db
-    def test_get_articles(self, mock_response):
+    def test_get_articles(self):
         articles = self.crawler.get_articles()
         assert len(articles) == 17
 
     @pytest.mark.django_db
-    def test_get_article_image(self, mock_response):
+    def test_get_article_image(self):
         articles = self.crawler.get_articles()
         assert (
             self.crawler.get_article_img(articles[0]).strip() == "https://estaticos-cdn.prensaiberica.es/clip/"
@@ -37,7 +37,7 @@ class TestFaroDeVigoCrawler(CommonTest):
         )
 
     @pytest.mark.django_db
-    def test_execute_crawler(self, mock_response):
+    def test_execute_crawler(self):
         articles = self.crawler.execute_crawler()
         assert len(articles) == 17
         for article in articles:
