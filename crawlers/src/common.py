@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from django.conf import settings
-from django.utils import timezone
+from datetime import datetime
 from url_normalize import url_normalize
 
 from core.models import Article
@@ -11,6 +10,7 @@ class CrawlerBase:
     source = None
     url_base = None
     url = None
+    DEFAULT_IMAGE = "default_image_url"  # Replace with a default image URL
 
     def get_articles(self) -> list:
         raise NotImplementedError
@@ -52,9 +52,9 @@ class CrawlerBase:
                 Article(
                     title=title,
                     url=url,
-                    image_url=self.get_article_img(article) or settings.DEFAULT_IMAGE,
+                    image_url=self.get_article_img(article) or self.DEFAULT_IMAGE,
                     source=self.source,
-                    created_at=timezone.now(),
+                    created_at=datetime.now(),  # Replacing timezone.now()
                 )
             )
         return articles
