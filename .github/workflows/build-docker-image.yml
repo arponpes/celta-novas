@@ -1,12 +1,7 @@
 name: Publish Docker images
 
 on:
-  workflow_run:
-    workflow_dispatch:
-    workflows: [Tests]
-    branches: [main]
-    types:
-      - completed
+  workflow_dispatch:
 
 env:
   REGISTRY_IMAGE: arponpes/celta_novas
